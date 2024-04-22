@@ -1,0 +1,42 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    background-color: orange;
+    height: 86px;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+ul {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+li {
+    list-style-type: none;
+}
+
+#articleDisplay {
+}
+
+img {
+    width: 150px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.articles {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
