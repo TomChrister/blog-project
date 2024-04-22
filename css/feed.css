@@ -23,10 +23,20 @@ li {
 }
 
 #articleDisplay {
-    display: flex;
-    justify-content: space-around;
 }
 
 img {
     width: 150px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.articles {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
 }
