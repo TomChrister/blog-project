@@ -9,18 +9,19 @@ function append(data) {
             <h2>${post.title}</h2>
             <p>${post.body}</p>
             ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
-            <img src="${post.media.url}" alt="${post.media.alt}">
+            ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
             <p>Author: ${post.author.name}</p>
         `;
         articleDisplay.appendChild(div);
-        console.log(data);
     });
 }
 
-
 fetch(apiArticle)
     .then((response) => response.json())
-    .then((data) => append(data))
+    .then((data) => {
+        console.log('Data from API:', data); // Log the data
+        append(data); // Process the data further
+    })
     .catch((error) => {
         console.error('Error fetching data:', error);
     });
