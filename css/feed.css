@@ -40,3 +40,42 @@ img {
     flex-direction: column;
     padding: 10px;
 }
+
+.articles a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.carousel-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-wrapper {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-article {
+    flex: 0 0 100%; /* Display one article at a time */
+    min-width: 100%; /* Ensure each article occupies the entire width */
+}
+
+.carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.carousel-control.prev {
+    left: 0;
+}
+
+.carousel-control.next {
+    right: 0;
+}
