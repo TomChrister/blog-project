@@ -24,6 +24,10 @@ fetch(apiArticle)
 function append(data) {
     articleDisplay.innerHTML = '';
     data.forEach((post) => {
+        const updatedDate = new Date(post.updated);
+        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
+        const authorName = post.author.name.replace(/_/g, ' ');
+
         const div = document.createElement("div");
         div.classList.add("articles")
         div.innerHTML = `
@@ -31,13 +35,13 @@ function append(data) {
             <p>${post.body}</p>
             ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
             ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
-            <p>Author: ${post.author.name}</p>
+            <p>Author: ${authorName}</p>
+            <p>Date: ${formattedDate}</p>
             <button class="deleteBtn" data-id="${post.id}">Delete</button>
         `;
         articleDisplay.appendChild(div);
     });
 }
-
 
 function deleteArticle(event) {
     const articleId = event.target.dataset.id;
@@ -61,7 +65,6 @@ function deleteArticle(event) {
             console.error('Error deleting article:', error);
         });
 }
-
 
 function sortByNewest() {
     const sortedData = [...articlesData].sort((a, b) => new Date(b.created) - new Date(a.created));
