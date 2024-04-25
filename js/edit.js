@@ -6,7 +6,22 @@ newPostForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
     const formData = new FormData(this);
-    const postData = Object.fromEntries(formData.entries());
+    const postData = {};
+
+    const tagValue = formData.get('tag');
+    postData.tags = [tagValue];
+
+    const imageUrl = formData.get('image_url');
+    postData.media = {
+        url: imageUrl,
+        alt: 'Media'
+    };
+
+    formData.forEach((value, key) => {
+        if (key !== 'tag' && key !== 'image_url') {
+            postData[key] = value;
+        }
+    });
 
     fetch(apiArticle, {
         method: 'POST',
@@ -18,7 +33,6 @@ newPostForm.addEventListener('submit', function(event) {
     })
         .then(response => response.json())
         .then(data => {
-            console.log('New post created:', data);
             window.location.href = '../index.html'
         })
         .catch(error => {

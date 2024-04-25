@@ -40,3 +40,8 @@ img {
     flex-direction: column;
     padding: 10px;
 }
+
+.article-link {
+    color: inherit;
+    text-decoration: none;
+}
