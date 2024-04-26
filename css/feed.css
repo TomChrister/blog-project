@@ -23,6 +23,7 @@ li {
 }
 
 #articleDisplay {
+    padding: 36px 32px 0 32px;
 }
 
 img {
@@ -46,23 +47,23 @@ img {
     text-decoration: none;
 }
 
-/* CSS for carousel styling */
-/* CSS for carousel container and navigation buttons */
 #carouselContainer {
     position: relative;
 }
 
 #carousel {
     display: flex;
-    overflow-x: auto;
+    overflow: hidden;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
 }
 
-.articles {
+.articles-carousel {
     flex: 0 0 auto;
     scroll-snap-align: start;
-    width: 100%; /* Ensure each article takes up the full width */
+    width: 100%;
+    display: inline-grid;
+    justify-content: center;
 }
 
 .btn {

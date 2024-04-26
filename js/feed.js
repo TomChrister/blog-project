@@ -32,7 +32,7 @@ function append(data) {
         const authorName = post.author.name.replace(/_/g, ' ');
 
         const div = document.createElement("div");
-        div.classList.add("articles")
+        div.classList.add("articles-carousel")
         div.innerHTML = `
             <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
             ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
@@ -84,7 +84,7 @@ function scrollLeft() {
 
 function scrollRight() {
     scrollPosition += articleWidth;
-    if (scrollPosition > carouselContainer.scrollWidth - carouselContainer.clientWidth) {
+    if (scrollPosition >= carouselContainer.scrollWidth) {
         scrollPosition = 0;
     }
     carouselContainer.scrollTo({
@@ -92,6 +92,7 @@ function scrollRight() {
         behavior: 'smooth'
     });
 }
+
 
 
 
