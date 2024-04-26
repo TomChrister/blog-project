@@ -1,5 +1,6 @@
 const apiArticle = 'https://v2.api.noroff.dev/blog/posts/Tom_Christer';
 const articleDisplay = document.getElementById('articleDisplay');
+const carouselContainer = document.getElementById('carousel');
 const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVG9tX0NocmlzdGVyIiwiZW1haWwiOiJ0b21zY2gwMTI2NkBzdHVkLm5vcm9mZi5ubyIsImlhdCI6MTcxMzM2MDU2M30.Pyo04wxqxm491vDWg9CMi8pug12fM07HWHCkPQjJFak';
 let articlesData = [];
 let currentTag = 'all';
@@ -22,8 +23,27 @@ fetch(apiArticle)
     });
 
 function append(data) {
+    carouselContainer.innerHTML = '';
     articleDisplay.innerHTML = '';
-    data.forEach((post) => {
+
+    data.slice(0, 3).forEach((post) => {
+        const updatedDate = new Date(post.updated);
+        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
+        const authorName = post.author.name.replace(/_/g, ' ');
+
+        const div = document.createElement("div");
+        div.classList.add("articles")
+        div.innerHTML = `
+            <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
+            ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
+            ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
+            <p>Author: ${authorName}</p>
+            <p>Date: ${formattedDate}</p>
+        `;
+        carouselContainer.appendChild(div);
+    });
+
+    data.slice(3).forEach((post) => {
         const updatedDate = new Date(post.updated);
         const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
         const authorName = post.author.name.replace(/_/g, ' ');
@@ -42,6 +62,39 @@ function append(data) {
         articleDisplay.appendChild(div);
     });
 }
+
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
+let scrollPosition = 0;
+const articleWidth = carouselContainer.offsetWidth;
+
+leftBtn.addEventListener("click", scrollLeft);
+rightBtn.addEventListener("click", scrollRight);
+
+function scrollLeft() {
+    scrollPosition -= articleWidth;
+    if (scrollPosition < 0) {
+        scrollPosition = 0;
+    }
+    carouselContainer.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+    });
+}
+
+function scrollRight() {
+    scrollPosition += articleWidth;
+    if (scrollPosition > carouselContainer.scrollWidth - carouselContainer.clientWidth) {
+        scrollPosition = 0;
+    }
+    carouselContainer.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+    });
+}
+
+
+
 
 function deleteArticle(event) {
     const articleId = event.target.dataset.id;
@@ -66,6 +119,7 @@ function deleteArticle(event) {
         });
 }
 
+/*
 function sortByNewest() {
     const sortedData = [...articlesData].sort((a, b) => new Date(b.created) - new Date(a.created));
     applyFilter(sortedData);
@@ -101,4 +155,4 @@ document.getElementById('oldestBtn').addEventListener('click', sortByOldest);
 document.getElementById('tagSelect').addEventListener('change', (event) => {
     const selectedTag = event.target.value;
     sortByTag(selectedTag);
-});
+});*/
