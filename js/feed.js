@@ -1,7 +1,5 @@
 const apiArticle = 'https://v2.api.noroff.dev/blog/posts/Tom_Christer';
-const articleDisplay = document.getElementById('articleDisplay');
 const carouselContainer = document.getElementById('carousel');
-const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVG9tX0NocmlzdGVyIiwiZW1haWwiOiJ0b21zY2gwMTI2NkBzdHVkLm5vcm9mZi5ubyIsImlhdCI6MTcxMzM2MDU2M30.Pyo04wxqxm491vDWg9CMi8pug12fM07HWHCkPQjJFak';
 let carouselArticleIds = [];
 let articlesData = [];
 let currentTag = 'all';
