@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Title</title>
-    <script src="/js/feed.js" defer></script>
     <link href="css/feed.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -18,10 +17,15 @@
     </ul>
 </header>
 
-<div>
-    <button id="newestBtn">Sort by newest</button>
-    <button id="oldestBtn">Sort by oldest</button>
+<div id="carouselContainer">
+    <div id="carousel" class="carousel">
+    </div>
+    <button id="leftBtn" class="btn">Left</button>
+    <button id="rightBtn" class="btn">Right</button>
 </div>
+
+<button id="newestBtn">Sort by newest</button>
+<button id="oldestBtn">Sort by oldest</button>
 
 <select id="tagSelect">
     <option value="all">All</option>
@@ -33,6 +37,9 @@
 
 <div class="container" id="articleDisplay">
 </div>
+
+<script src="/js/feed.js" defer></script>
+
 
 </body>
 </html>
