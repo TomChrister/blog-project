@@ -2,6 +2,7 @@ const apiArticle = 'https://v2.api.noroff.dev/blog/posts/Tom_Christer';
 const articleDisplay = document.getElementById('articleDisplay');
 const carouselContainer = document.getElementById('carousel');
 const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVG9tX0NocmlzdGVyIiwiZW1haWwiOiJ0b21zY2gwMTI2NkBzdHVkLm5vcm9mZi5ubyIsImlhdCI6MTcxMzM2MDU2M30.Pyo04wxqxm491vDWg9CMi8pug12fM07HWHCkPQjJFak';
+let carouselArticleIds = [];
 let articlesData = [];
 let currentTag = 'all';
 
@@ -16,39 +17,38 @@ fetch(apiArticle)
         console.error('Error fetching data:', error);
     });
 
-function appendToCarousel(data) {
+function carouselDisplay(data) {
     const carouselContainer = getCarouselContainer();
     carouselContainer.innerHTML = '';
+    carouselArticleIds = [];
 
     data.slice(0, 3).forEach((post) => {
-        const updatedDate = new Date(post.updated);
-        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
-        const authorName = post.author.name.replace(/_/g, ' ');
-
         const div = document.createElement("div");
-        div.classList.add("articles-carousel")
+        div.classList.add("articles-carousel");
         div.innerHTML = `
             <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
             ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
             ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
-            <p>Author: ${authorName}</p>
-            <p>Date: ${formattedDate}</p>
         `;
         carouselContainer.appendChild(div);
+        carouselArticleIds.push(post.id);
     });
 }
 
-function appendToArticleDisplay(data) {
+function articleGrid(data) {
     const articleDisplay = getArticleDisplay();
     articleDisplay.innerHTML = '';
 
-    data.slice(3).forEach((post) => {
+    data.forEach((post) => {
+        if (carouselArticleIds.includes(post.id)) {
+            return;
+        }
         const updatedDate = new Date(post.updated);
         const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
         const authorName = post.author.name.replace(/_/g, ' ');
 
         const div = document.createElement("div");
-        div.classList.add("articles")
+        div.classList.add("articles");
         div.innerHTML = `
             <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
             <p>${post.body}</p>
@@ -56,7 +56,6 @@ function appendToArticleDisplay(data) {
             ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
             <p>Author: ${authorName}</p>
             <p>Date: ${formattedDate}</p>
-            <button class="deleteBtn" data-id="${post.id}">Delete</button>
         `;
         articleDisplay.appendChild(div);
     });
@@ -70,51 +69,46 @@ function getCarouselContainer() {
     return document.getElementById('carousel');
 }
 
-// Function to sort articles by newest (NEW AND WORKS FOR ARTICLES ONLY!!)
+function append(data) {
+    carouselDisplay(data);
+    articleGrid(data);
+}
+
 function sortByNewest() {
-    const sortedData = [...articlesData].sort((a, b) => new Date(b.created) - new Date(a.created));
-    appendToArticleDisplay(sortedData);
+    let sortedData = [...articlesData].sort((a, b) => new Date(b.created) - new Date(a.created));
+
+    if (currentTag !== 'all') {
+        sortedData = sortedData.filter(article => article.tags && article.tags.includes(currentTag));
+    }
+    articleGrid(sortedData);
 }
 
 function sortByOldest() {
-    const sortedData = [...articlesData].sort((a, b) => new Date(a.created) - new Date(b.created));
-    appendToArticleDisplay(sortedData);
+    let sortedData = [...articlesData].sort((a, b) => new Date(a.created) - new Date(b.created));
+
+    if (currentTag !== 'all') {
+        sortedData = sortedData.filter(article => article.tags && article.tags.includes(currentTag));
+    }
+    articleGrid(sortedData);
 }
 
 document.getElementById('newestBtn').addEventListener('click', sortByNewest);
 document.getElementById('oldestBtn').addEventListener('click', sortByOldest);
 
-
-
-// Function to filter articles by tag
-/*function sortByTag(tag) {
-    console.log('Selected tag:', tag); // Add this line for debugging
+function sortByTag(tag) {
     currentTag = tag;
     if (tag === 'all') {
-        appendToArticleDisplay(articlesData);
+        articleGrid(articlesData);
     } else {
         const filteredData = articlesData.filter(post => post.tags && post.tags.includes(tag));
-        appendToArticleDisplay(filteredData);
+        articleGrid(filteredData);
     }
 }
 
 document.getElementById('tagSelect').addEventListener('change', (event) => {
     const selectedTag = event.target.value;
     sortByTag(selectedTag);
-});*/
-
-
-function append(data) {
-    appendToCarousel(data);
-    appendToArticleDisplay(data);
-}
-
-
-
-
-
-
-
+});
 
 const leftBtn = document.getElementById("leftBtn");
 const rightBtn = document.getElementById("rightBtn");
@@ -146,6 +140,7 @@ function scrollRight() {
     });
 }
 
+/*
 articleDisplay.addEventListener('click', function(event) {
     if (event.target.classList.contains('deleteBtn')) {
         deleteArticle(event);
@@ -173,88 +168,4 @@ function deleteArticle(event) {
         .catch(error => {
             console.error('Error deleting article:', error);
         });
-}
-
-
-
-
-/*function append(data) {
-    carouselContainer.innerHTML = '';
-    articleDisplay.innerHTML = '';
-
-    data.slice(0, 3).forEach((post) => {
-        const updatedDate = new Date(post.updated);
-        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
-        const authorName = post.author.name.replace(/_/g, ' ');
-
-        const div = document.createElement("div");
-        div.classList.add("articles-carousel")
-        div.innerHTML = `
-            <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
-            ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
-            ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
-            <p>Author: ${authorName}</p>
-            <p>Date: ${formattedDate}</p>
-        `;
-        carouselContainer.appendChild(div);
-    });
-
-    data.slice(3).forEach((post) => {
-        const updatedDate = new Date(post.updated);
-        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
-        const authorName = post.author.name.replace(/_/g, ' ');
-
-        const div = document.createElement("div");
-        div.classList.add("articles")
-        div.innerHTML = `
-            <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
-            <p>${post.body}</p>
-            ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
-            ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
-            <p>Author: ${authorName}</p>
-            <p>Date: ${formattedDate}</p>
-            <button class="deleteBtn" data-id="${post.id}">Delete</button>
-        `;
-        articleDisplay.appendChild(div);
-    });
 }*/
-
-
-
-/*
-function sortByNewest() {
-    const sortedData = [...articlesData].sort((a, b) => new Date(b.created) - new Date(a.created));
-    applyFilter(sortedData);
-}
-
-function sortByOldest() {
-    const sortedData = [...articlesData].sort((a, b) => new Date(a.created) - new Date(b.created));
-    applyFilter(sortedData);
-}
-
-function sortByTag(tag) {
-    currentTag = tag;
-    if (tag === 'all') {
-        append(articlesData);
-    } else {
-        const filteredData = articlesData.filter(post => post.tags && post.tags.includes(tag));
-        append(filteredData);
-    }
-}
-
-function applyFilter(data) {
-    if (currentTag === 'all') {
-        append(data);
-    } else {
-        const filteredData = data.filter(post => post.tags && post.tags.includes(currentTag));
-        append(filteredData);
-    }
-}
-
-document.getElementById('newestBtn').addEventListener('click', sortByNewest);
-document.getElementById('oldestBtn').addEventListener('click', sortByOldest);
-
-document.getElementById('tagSelect').addEventListener('change', (event) => {
-    const selectedTag = event.target.value;
-    sortByTag(selectedTag);
-});*/

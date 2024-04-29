@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Title</title>
-    <script type="module" src="/js/feed.js" defer></script>
     <link href="css/feed.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -25,21 +24,22 @@
     <button id="rightBtn" class="btn">Right</button>
 </div>
 
-<div>
-    <button id="newestBtn">Sort by newest</button>
-    <button id="oldestBtn">Sort by oldest</button>
-</div>
+<button id="newestBtn">Sort by newest</button>
+<button id="oldestBtn">Sort by oldest</button>
 
-<!--<select id="tagSelect">
+<select id="tagSelect">
     <option value="all">All</option>
     <option value="Tech">Tech</option>
     <option value="AI">AI</option>
     <option value="Coding">Coding</option>
     <option value="New">New</option>
-</select>-->
+</select>
 
 <div class="container" id="articleDisplay">
 </div>
+
+<script src="/js/feed.js" defer></script>
+
 
 </body>
 </html>
