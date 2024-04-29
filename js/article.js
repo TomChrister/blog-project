@@ -6,8 +6,6 @@ fetch(apiArticleById)
     .then((response) => response.json())
     .then((data) => {
         console.log('Article Data:', data);
-        console.log('Article Title:', data.title);
-        console.log('Article Body:', data.body);
         displayArticle(data);
     })
     .catch((error) => {
@@ -17,9 +15,8 @@ fetch(apiArticleById)
 function displayArticle(article) {
     const articleDisplay = document.getElementById('articleDisplay');
     articleDisplay.innerHTML = `
-        <h2>${article.title}</h2>
-        <p>${article.body}</p>
-        ${article.tag ? `<p>Tag: ${article.tag}</p>` : ''}
-        ${article.media ? `<img src="${article.media.url}" alt="${article.media.alt}">` : ''}
+        <h2>${article.data.title}</h2>
+        <p>${article.data.body}</p>
+        ${article.data.media ? `<img src="${article.data.media.url}" alt="${article.data.media.alt}">` : ''}
     `;
 }

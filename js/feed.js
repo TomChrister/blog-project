@@ -5,12 +5,6 @@ const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVG9tX0Nocm
 let articlesData = [];
 let currentTag = 'all';
 
-articleDisplay.addEventListener('click', function(event) {
-    if (event.target.classList.contains('deleteBtn')) {
-        deleteArticle(event);
-    }
-});
-
 fetch(apiArticle)
     .then((response) => response.json())
     .then((data) => {
@@ -22,7 +16,169 @@ fetch(apiArticle)
         console.error('Error fetching data:', error);
     });
 
+function appendToCarousel(data) {
+    const carouselContainer = getCarouselContainer();
+    carouselContainer.innerHTML = '';
+
+    data.slice(0, 3).forEach((post) => {
+        const updatedDate = new Date(post.updated);
+        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
+        const authorName = post.author.name.replace(/_/g, ' ');
+
+        const div = document.createElement("div");
+        div.classList.add("articles-carousel")
+        div.innerHTML = `
+            <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
+            ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
+            ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
+            <p>Author: ${authorName}</p>
+            <p>Date: ${formattedDate}</p>
+        `;
+        carouselContainer.appendChild(div);
+    });
+}
+
+function appendToArticleDisplay(data) {
+    const articleDisplay = getArticleDisplay();
+    articleDisplay.innerHTML = '';
+
+    data.slice(3).forEach((post) => {
+        const updatedDate = new Date(post.updated);
+        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
+        const authorName = post.author.name.replace(/_/g, ' ');
+
+        const div = document.createElement("div");
+        div.classList.add("articles")
+        div.innerHTML = `
+            <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
+            <p>${post.body}</p>
+            ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
+            ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
+            <p>Author: ${authorName}</p>
+            <p>Date: ${formattedDate}</p>
+            <button class="deleteBtn" data-id="${post.id}">Delete</button>
+        `;
+        articleDisplay.appendChild(div);
+    });
+}
+
+function getArticleDisplay() {
+    return document.getElementById('articleDisplay');
+}
+
+function getCarouselContainer() {
+    return document.getElementById('carousel');
+}
+
+// Function to sort articles by newest (NEW AND WORKS FOR ARTICLES ONLY!!)
+function sortByNewest() {
+    const sortedData = [...articlesData].sort((a, b) => new Date(b.created) - new Date(a.created));
+    appendToArticleDisplay(sortedData);
+}
+
+function sortByOldest() {
+    const sortedData = [...articlesData].sort((a, b) => new Date(a.created) - new Date(b.created));
+    appendToArticleDisplay(sortedData);
+}
+
+document.getElementById('newestBtn').addEventListener('click', sortByNewest);
+document.getElementById('oldestBtn').addEventListener('click', sortByOldest);
+
+
+
+// Function to filter articles by tag
+/*function sortByTag(tag) {
+    console.log('Selected tag:', tag); // Add this line for debugging
+    currentTag = tag;
+    if (tag === 'all') {
+        appendToArticleDisplay(articlesData);
+    } else {
+        const filteredData = articlesData.filter(post => post.tags && post.tags.includes(tag));
+        appendToArticleDisplay(filteredData);
+    }
+}
+
+document.getElementById('tagSelect').addEventListener('change', (event) => {
+    const selectedTag = event.target.value;
+    sortByTag(selectedTag);
+});*/
+
+
 function append(data) {
+    appendToCarousel(data);
+    appendToArticleDisplay(data);
+}
+
+
+
+
+
+
+
+
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
+let scrollPosition = 0;
+const articleWidth = carouselContainer.offsetWidth;
+
+leftBtn.addEventListener("click", scrollLeft);
+rightBtn.addEventListener("click", scrollRight);
+
+function scrollLeft() {
+    scrollPosition -= articleWidth;
+    if (scrollPosition < 0) {
+        scrollPosition = 0;
+    }
+    carouselContainer.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+    });
+}
+
+function scrollRight() {
+    scrollPosition += articleWidth;
+    if (scrollPosition >= carouselContainer.scrollWidth) {
+        scrollPosition = 0;
+    }
+    carouselContainer.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+    });
+}
+
+articleDisplay.addEventListener('click', function(event) {
+    if (event.target.classList.contains('deleteBtn')) {
+        deleteArticle(event);
+    }
+});
+
+function deleteArticle(event) {
+    const articleId = event.target.dataset.id;
+    const deleteUrl = `${apiArticle}/${articleId}`;
+
+    fetch(deleteUrl, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${bearerToken}`
+        },
+    })
+        .then(response => {
+            if (response.ok) {
+                articlesData = articlesData.filter(article => article.id !== articleId);
+                append(articlesData);
+            } else {
+                console.error('Failed to delete article');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting article:', error);
+        });
+}
+
+
+
+
+/*function append(data) {
     carouselContainer.innerHTML = '';
     articleDisplay.innerHTML = '';
 
@@ -61,64 +217,9 @@ function append(data) {
         `;
         articleDisplay.appendChild(div);
     });
-}
-
-const leftBtn = document.getElementById("leftBtn");
-const rightBtn = document.getElementById("rightBtn");
-let scrollPosition = 0;
-const articleWidth = carouselContainer.offsetWidth;
-
-leftBtn.addEventListener("click", scrollLeft);
-rightBtn.addEventListener("click", scrollRight);
-
-function scrollLeft() {
-    scrollPosition -= articleWidth;
-    if (scrollPosition < 0) {
-        scrollPosition = 0;
-    }
-    carouselContainer.scrollTo({
-        left: scrollPosition,
-        behavior: 'smooth'
-    });
-}
-
-function scrollRight() {
-    scrollPosition += articleWidth;
-    if (scrollPosition >= carouselContainer.scrollWidth) {
-        scrollPosition = 0;
-    }
-    carouselContainer.scrollTo({
-        left: scrollPosition,
-        behavior: 'smooth'
-    });
-}
+}*/
 
 
-
-
-
-function deleteArticle(event) {
-    const articleId = event.target.dataset.id;
-    const deleteUrl = `${apiArticle}/${articleId}`;
-
-    fetch(deleteUrl, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${bearerToken}`
-        },
-    })
-        .then(response => {
-            if (response.ok) {
-                articlesData = articlesData.filter(article => article.id !== articleId);
-                append(articlesData);
-            } else {
-                console.error('Failed to delete article');
-            }
-        })
-        .catch(error => {
-            console.error('Error deleting article:', error);
-        });
-}
 
 /*
 function sortByNewest() {
