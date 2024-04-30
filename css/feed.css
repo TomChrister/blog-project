@@ -12,6 +12,11 @@ header {
     font-size: 1.2rem;
 }
 
+header ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
 ul {
     display: flex;
     justify-content: space-evenly;
@@ -47,6 +52,12 @@ img {
     text-decoration: none;
 }
 
+.articles-carousel img {
+    width: 855px;
+    height: 290px;
+    object-fit: cover;
+}
+
 #carouselContainer {
     position: relative;
 }
@@ -66,11 +77,38 @@ img {
     justify-content: center;
 }
 
+.articles-carousel h2 a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.content-container {
+    position: relative;
+    text-align: center;
+}
+
+.content-container h2 {
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+}
+
+
 .carouselBtn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.carouselBtn i {
+    font-size: 36px;
+    border: none;
+    color: grey;
 }
 
 #leftBtn {

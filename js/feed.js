@@ -24,10 +24,13 @@ function carouselDisplay(data) {
         const div = document.createElement("div");
         div.classList.add("articles-carousel");
         div.innerHTML = `
+            <div class="content-container">
             <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
             ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
             ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
+            </div>
         `;
+
         carouselContainer.appendChild(div);
         carouselArticleIds.push(post.id);
     });
@@ -42,7 +45,7 @@ function articleGrid(data) {
             return;
         }
         const updatedDate = new Date(post.updated);
-        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
+        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()}`;
         const authorName = post.author.name.replace(/_/g, ' ');
 
         const div = document.createElement("div");
@@ -53,7 +56,7 @@ function articleGrid(data) {
             ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
             ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
             <p>Author: ${authorName}</p>
-            <p>Date: ${formattedDate}</p>
+            <p>${formattedDate}</p>
         `;
         articleDisplay.appendChild(div);
     });
