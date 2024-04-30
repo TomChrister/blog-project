@@ -30,7 +30,7 @@ img {
     width: 150px;
 }
 
-.container {
+.articleContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
@@ -66,7 +66,7 @@ img {
     justify-content: center;
 }
 
-.btn {
+.carouselBtn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
