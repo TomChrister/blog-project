@@ -1,31 +1,4 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    display: flex;
-    background-color: orange;
-    height: 86px;
-    align-items: center;
-    font-size: 1.2rem;
-}
-
-header ul li a {
-    text-decoration: none;
-    color: inherit;
-}
-
-ul {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-}
-
-li {
-    list-style-type: none;
-}
+@import "header.css";
 
 #articleDisplay {
     padding: 36px 32px 0 32px;

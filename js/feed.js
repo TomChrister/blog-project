@@ -26,11 +26,9 @@ function carouselDisplay(data) {
         div.innerHTML = `
             <div class="content-container">
             <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
-            ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
             ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
             </div>
         `;
-
         carouselContainer.appendChild(div);
         carouselArticleIds.push(post.id);
     });
@@ -51,16 +49,26 @@ function articleGrid(data) {
         const div = document.createElement("div");
         div.classList.add("articles");
         div.innerHTML = `
-            <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
+            <h2>${post.title}</h2>
             <p>${post.body}</p>
-            ${post.tag ? `<p>Tag: ${post.tag}</p>` : ''}
-            ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
+            <a href="article.html?id=${post.id}">${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}</a>
             <p>Author: ${authorName}</p>
             <p>${formattedDate}</p>
         `;
         articleDisplay.appendChild(div);
     });
 }
+
+function search() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const filteredArticles = articlesData.filter(article =>
+        article.title.toLowerCase().includes(query) ||
+        (article.tags && article.tags.some(tag => tag.toLowerCase().includes(query)))
+    );
+    articleGrid(filteredArticles);
+}
+
+document.getElementById('searchInput').addEventListener('input', search);
 
 function getArticleDisplay() {
     return document.getElementById('articleDisplay');
@@ -71,6 +79,7 @@ function getCarouselContainer() {
 }
 
 function append(data) {
+    articlesData = data;
     carouselDisplay(data);
     articleGrid(data);
 }
@@ -141,32 +150,3 @@ function scrollRight() {
     });
 }
 
-/*
-articleDisplay.addEventListener('click', function(event) {
-    if (event.target.classList.contains('deleteBtn')) {
-        deleteArticle(event);
-    }
-});
-
-function deleteArticle(event) {
-    const articleId = event.target.dataset.id;
-    const deleteUrl = `${apiArticle}/${articleId}`;
-
-    fetch(deleteUrl, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${bearerToken}`
-        },
-    })
-        .then(response => {
-            if (response.ok) {
-                articlesData = articlesData.filter(article => article.id !== articleId);
-                append(articlesData);
-            } else {
-                console.error('Failed to delete article');
-            }
-        })
-        .catch(error => {
-            console.error('Error deleting article:', error);
-        });
-}*/
