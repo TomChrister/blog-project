@@ -1,11 +1,20 @@
 @import "header.css";
 
-#articleDisplay {
-    padding: 36px 32px 0 32px;
+* {
+    box-sizing: border-box;
 }
 
-img {
-    width: 150px;
+#articleDisplay {
+    padding: 36px 16px 0 16px;
+}
+
+
+
+.grid-img {
+    width: 40vw;
+    max-width: 209px;
+    height: 54%;
+    object-fit: fill;
 }
 
 .articleContainer {
@@ -18,6 +27,11 @@ img {
     display: flex;
     flex-direction: column;
     padding: 10px;
+    align-items: center;
+}
+
+.articles h2 {
+    align-self: flex-start;
 }
 
 .articles a {
@@ -29,6 +43,20 @@ img {
     width: 855px;
     height: 290px;
     object-fit: cover;
+}
+
+@media screen and (min-width: 430px) and (max-width: 650px){
+    .articles-carousel img {
+        width: 316px;
+        height: 152px;
+        object-fit: cover;
+    }
+
+    .articleContainer {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
 }
 
 #carouselContainer {
