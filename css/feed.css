@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 #articleDisplay {
     padding: 36px 16px 0 16px;
 }
@@ -13,18 +18,17 @@
     max-width: 209px;
     height: 54%;
     object-fit: fill;
+    border-radius: 8px;
 }
 
 .articleContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
 }
 
 .articles {
     display: flex;
-    flex-direction: column;
-    padding: 10px;
+    justify-content: center;
     align-items: center;
 }
 
@@ -43,7 +47,7 @@
     object-fit: cover;
 }
 
-@media screen and (min-width: 430px) and (max-width: 650px){
+@media screen and (min-width: 430px) and (max-width: 780px){
     .articles-carousel img {
         width: 316px;
         height: 152px;
@@ -57,7 +61,7 @@
     }
 }
 
-@media screen and (min-width: 650px) {
+@media screen and (min-width: 650px) and (max-width: 1800px){
     .articles-carousel img {
         width: 556px;
         height: 290px;
