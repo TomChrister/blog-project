@@ -10,30 +10,28 @@ body {
 }
 
 #articleDisplay {
-    padding: 36px 16px 0 16px;
+    padding: 36px 122px 0 122px;
 }
 
 .grid-img {
-    width: 40vw;
-    max-width: 209px;
-    height: 54%;
-    object-fit: fill;
+    width: 338px;
+    height: 158px;
+    object-fit: cover;
     border-radius: 8px;
 }
 
 .articleContainer {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 38px;
 }
 
 .articles {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.articles h2 {
-    align-self: flex-start;
+    padding-bottom: 16px;
 }
 
 .articles a {
