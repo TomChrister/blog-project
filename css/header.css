@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    background-color: transparent;
+    height: 86px;
+    align-items: center;
+    font-size: 1.2rem;
+    justify-content: space-around;
+}
+
+header ul li a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    gap: 16px;
+}
+
+li {
+    list-style-type: none;
+}
