@@ -6,10 +6,11 @@
 
 header {
     display: flex;
-    background-color: orange;
+    background-color: transparent;
     height: 86px;
     align-items: center;
     font-size: 1.2rem;
+    justify-content: space-around;
 }
 
 header ul li a {
@@ -21,6 +22,7 @@ ul {
     display: flex;
     justify-content: space-evenly;
     width: 100%;
+    gap: 16px;
 }
 
 li {
