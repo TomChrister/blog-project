@@ -50,11 +50,10 @@ function articleGrid(data) {
         div.classList.add("articles");
         div.innerHTML = `
             <div class="content-wrapper">
+                <a href="article.html?id=${post.id}">${post.media ? `<img class="grid-img" src="${post.media.url}" alt="${post.media.alt}">` : ''}</a>
                 <h2>${post.title}</h2>
                 <p>${post.body}</p>
-                <a href="article.html?id=${post.id}">${post.media ? `<img class="grid-img" src="${post.media.url}" alt="${post.media.alt}">` : ''}</a>
-                <p>Author: ${authorName}</p>
-                <p>${formattedDate}</p>
+                <p>${authorName} • ${formattedDate}</p>
             </div>
         `;
         articleDisplay.appendChild(div);

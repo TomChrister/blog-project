@@ -10,7 +10,7 @@ body {
 }
 
 #articleDisplay {
-    padding: 36px 122px 0 122px;
+    padding: 36px 34px 36px 34px;
 }
 
 .grid-img {
@@ -45,18 +45,23 @@ body {
     object-fit: cover;
 }
 
-@media screen and (min-width: 430px) and (max-width: 780px){
+@media screen and (min-width: 430px) and (max-width: 800px){
     .articles-carousel img {
-        width: 316px;
-        height: 152px;
+        width: 412px;
+        height: 178px;
         object-fit: cover;
     }
 
-    .articleContainer {
+    /*.articleContainer {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
+        gap: 0;
+    }*/
+
+    /*.grid-img {
+        width: 250px;
+        height: 124px;
+    }*/
 }
 
 @media screen and (min-width: 650px) and (max-width: 1800px){
@@ -76,6 +81,7 @@ body {
     overflow: hidden;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
+    padding: 0 0 16px 0;
 }
 
 .articles-carousel {
@@ -94,6 +100,10 @@ body {
 .content-container {
     position: relative;
     text-align: center;
+}
+
+.content-container img {
+    border-radius: 4px;
 }
 
 .content-container h2 {
