@@ -3,6 +3,10 @@ const carouselContainer = document.getElementById('carousel');
 let carouselArticleIds = [];
 let articlesData = [];
 let currentTag = 'all';
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
+let scrollPosition = 0;
+const articleWidth = carouselContainer.offsetWidth;
 
 fetch(apiArticle)
     .then((response) => response.json())
@@ -121,11 +125,6 @@ document.getElementById('tagSelect').addEventListener('change', (event) => {
     sortByTag(selectedTag);
 });
 
-const leftBtn = document.getElementById("leftBtn");
-const rightBtn = document.getElementById("rightBtn");
-let scrollPosition = 0;
-const articleWidth = carouselContainer.offsetWidth;
-
 leftBtn.addEventListener("click", scrollLeft);
 rightBtn.addEventListener("click", scrollRight);
 
@@ -151,3 +150,41 @@ function scrollRight() {
     });
 }
 
+function loggedIn() {
+    const accessToken = sessionStorage.getItem('Session key');
+    return accessToken !== null;
+}
+
+function updateHeader() {
+    const loginAnchor = document.getElementById('loginAnchor');
+
+    if (loggedIn()) {
+        loginAnchor.textContent = 'Log out';
+        loginAnchor.href = 'index.html';
+    } else {
+        loginAnchor.textContent = 'Log in';
+        loginAnchor.href = 'account/login.html'
+    }
+}
+updateHeader();
+
+function logout() {
+    sessionStorage.removeItem('Session key');
+    window.location.href = 'index.html';
+}
+
+const logoutBtn = document.getElementById('loginAnchor');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', logout);
+}
+
+const newPostBtn = document.getElementById('newPost');
+if (newPostBtn) {
+    newPostBtn.addEventListener('click', function(event) {
+        if (!loggedIn()) {
+            event.preventDefault();
+            alert('You need to be logged in to create a post. Click OK to go to login page.');
+            window.location.href = 'account/login.html';
+        }
+    });
+}

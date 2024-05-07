@@ -19,7 +19,6 @@ function displayArticle(article) {
     const updatedDate = new Date(article.data.updated);
     const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
     const authorName = article.data.author.name.replace(/_/g, ' ');
-
     const currentUrl = window.location.href;
 
     articleDisplay.innerHTML = `
@@ -28,9 +27,14 @@ function displayArticle(article) {
         <p>${formattedDate}</p>
         <p>${authorName}</p>
         ${article.data.media ? `<img src="${article.data.media.url}" alt="${article.data.media.alt}">` : ''}
-        <button class="deleteBtn" data-id="${article.data.id}">Delete</button>
+        ${loggedIn() ? `<button class="deleteBtn" data-id="${article.data.id}">Delete</button>` : ''}
         <button onclick="copyClipboard('${currentUrl}')"><i class="fa-solid fa-link"></i></button>
     `;
+}
+
+function loggedIn() {
+    const accessToken = sessionStorage.getItem('Session key');
+    return accessToken !== null;
 }
 
 function copyClipboard (url) {
