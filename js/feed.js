@@ -162,7 +162,7 @@ function updateHeader() {
         loginAnchor.textContent = 'Log out';
         loginAnchor.href = 'index.html';
     } else {
-        loginAnchor.textContent = 'Log in';
+        loginAnchor.textContent = 'Login';
         loginAnchor.href = 'account/login.html'
     }
 }

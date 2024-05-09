@@ -9,8 +9,9 @@ header {
     background-color: transparent;
     height: 86px;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
     justify-content: space-around;
+    font-family: Montserrat, sans-serif;
 }
 
 header ul li a {
@@ -27,4 +28,17 @@ ul {
 
 li {
     list-style-type: none;
+}
+
+#loginAnchor {
+    text-decoration: none;
+    color: white;
+}
+
+.login {
+    width: 54px;
+    height: 26px;
+    border-radius: 4px;
+    border: none;
+    background: #696565;
 }
