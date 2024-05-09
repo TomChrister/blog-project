@@ -56,7 +56,7 @@ function articleGrid(data) {
             <div class="content-wrapper">
                 <a href="article.html?id=${post.id}">${post.media ? `<img class="grid-img" src="${post.media.url}" alt="${post.media.alt}">` : ''}</a>
                 <h2>${post.title}</h2>
-                <p>${post.body}</p>
+                <p class="body-p">${post.body}</p>
                 <p>${authorName} • ${formattedDate}</p>
             </div>
         `;

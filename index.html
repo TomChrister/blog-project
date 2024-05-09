@@ -29,11 +29,8 @@
             <li>About</li>
         </ul>
     </div>
-    <div>
-        <button class="login">
-            <a id="loginAnchor" href="account/login.html"></a>
-        </button>
-    </div>
+    <a id="loginAnchor" href="account/login.html">
+    </a>
 </header>
 
 <div id="carouselContainer">
@@ -43,7 +40,8 @@
     <button id="rightBtn" class="carouselBtn"><i class="fa-solid fa-circle-chevron-right"></i></button>
 </div>
 
-
+<input type="text" id="searchInput" placeholder="Search articles...">
+<button onclick="search()">Search</button>
 
 <button id="newestBtn">Sort by newest</button>
 <button id="oldestBtn">Sort by oldest</button>
@@ -55,9 +53,6 @@
     <option value="Coding">Coding</option>
     <option value="New">New</option>
 </select>
-
-<input type="text" id="searchInput" placeholder="Search articles...">
-<button onclick="search()">Search</button>
 
 <div class="articleContainer" id="articleDisplay">
 </div>

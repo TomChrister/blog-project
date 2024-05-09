@@ -52,22 +52,11 @@ body {
         height: 178px;
         object-fit: cover;
     }
-
-    /*.articleContainer {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0;
-    }*/
-
-    /*.grid-img {
-        width: 250px;
-        height: 124px;
-    }*/
 }
 
 @media screen and (min-width: 650px) and (max-width: 1800px){
     .articles-carousel img {
-        width: 556px;
+        width: 74vw;
         height: 290px;
         object-fit: cover;
     }
@@ -75,7 +64,7 @@ body {
 
 #carouselContainer {
     position: relative;
-    background-image: url('../assets/images/black-abstract.jpg');
+    background-image: url('../assets/images/bc.jpg');
 }
 
 #carousel {
@@ -83,7 +72,7 @@ body {
     overflow: hidden;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
-    padding: 0 0 16px 0;
+    padding: 16px 0 16px 0;
 }
 
 .articles-carousel {
@@ -106,6 +95,7 @@ body {
 
 .content-container img {
     border-radius: 4px;
+    box-shadow: 0 0 25px black
 }
 
 .content-container h2 {
@@ -113,7 +103,9 @@ body {
     top: 32%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    color: white;
+    filter: drop-shadow(2px 4px 6px black);
+    font-size: 40px;
 }
 
 
@@ -140,38 +132,10 @@ body {
     right: 10px;
 }
 
-/* CSS */
-.custom-alert {
-    display: none; /* Initially hide the custom alert */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-}
-
-.custom-alert-content {
-    text-align: center;
-}
-
-.custom-alert button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.custom-alert button:hover {
-    background-color: #0056b3;
-}
-
 .articles h2 {
     font-size: 18px;
+}
+
+.body-p {
+    padding: 4px 0 4px 0;
 }
