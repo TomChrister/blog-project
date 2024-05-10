@@ -106,9 +106,28 @@ function sortByOldest() {
     }
     articleGrid(sortedData);
 }
+sortByNewest();
+sortByOldest();
 
-document.getElementById('newestBtn').addEventListener('click', sortByNewest);
-document.getElementById('oldestBtn').addEventListener('click', sortByOldest);
+
+function sortArticles(order) {
+    let sortedData;
+    if (order === 'newest') {
+        sortedData = [...articlesData].sort((a, b) => new Date(b.created) - new Date(a.created));
+    } else if (order === 'oldest') {
+        sortedData = [...articlesData].sort((a, b) => new Date(a.created) - new Date(b.created));
+    }
+
+    if (currentTag !== 'all') {
+        sortedData = sortedData.filter(article => article.tags && article.tags.includes(currentTag));
+    }
+    articleGrid(sortedData);
+}
+
+document.getElementById('sortSelect').addEventListener('change', function() {
+    const selectedOption = this.value;
+    sortArticles(selectedOption);
+});
 
 function sortByTag(tag) {
     currentTag = tag;

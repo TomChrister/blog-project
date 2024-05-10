@@ -43,10 +43,14 @@
 <input type="text" id="searchInput" placeholder="Search articles...">
 <button onclick="search()">Search</button>
 
-<button id="newestBtn">Sort by newest</button>
-<button id="oldestBtn">Sort by oldest</button>
+<select id="sortSelect">
+    <option value disabled selected>Sort by</option>
+    <option value="newest">Newest</option>
+    <option value="oldest">Oldest</option>
+</select>
 
 <select id="tagSelect">
+    <option value disabled selected>Tags</option>
     <option value="all">All</option>
     <option value="Tech">Tech</option>
     <option value="AI">AI</option>
