@@ -25,11 +25,17 @@ function carouselDisplay(data) {
     carouselArticleIds = [];
 
     data.slice(0, 3).forEach((post) => {
+
+        const updatedDate = new Date(post.updated);
+        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()}`;
+        const authorName = post.author.name.replace(/_/g, ' ');
+
         const div = document.createElement("div");
         div.classList.add("articles-carousel");
         div.innerHTML = `
             <div class="content-container">
             <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
+            <p class="author">${authorName} • ${formattedDate}</p>
             ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
             </div>
         `;

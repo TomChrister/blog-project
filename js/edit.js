@@ -39,3 +39,22 @@ newPostForm.addEventListener('submit', function(event) {
             console.error('Error creating new post:', error);
         });
 });
+
+function loggedIn() {
+    const accessToken = sessionStorage.getItem('Session key');
+    return accessToken !== null;
+}
+loggedIn();
+
+function updateHeader() {
+    const loginAnchor = document.getElementById('loginAnchor');
+
+    if (loggedIn()) {
+        loginAnchor.textContent = 'Log out';
+        loginAnchor.href = 'index.html';
+    } else {
+        loginAnchor.textContent = 'Login';
+        loginAnchor.href = 'account/login.html'
+    }
+}
+updateHeader();

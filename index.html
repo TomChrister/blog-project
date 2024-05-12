@@ -17,7 +17,7 @@
     <div>
         <ul>
             <li><a href="index.html">
-                Logo
+                <img src="assets/images/Group.svg" alt="logo">
             </a></li>
         </ul>
     </div>
@@ -36,27 +36,37 @@
 <div id="carouselContainer">
     <div id="carousel" class="carousel">
     </div>
-    <button id="leftBtn" class="carouselBtn"><i class="fa-solid fa-circle-chevron-left"></i></button>
-    <button id="rightBtn" class="carouselBtn"><i class="fa-solid fa-circle-chevron-right"></i></button>
+    <button id="leftBtn" class="carouselBtn"><i class="fa-solid fa-chevron-left"></i></i></button>
+    <button id="rightBtn" class="carouselBtn"><i class="fa-solid fa-chevron-right"></i></button>
 </div>
 
-<input type="text" id="searchInput" placeholder="Search articles...">
-<button onclick="search()">Search</button>
+<div class="input-container">
+    <div class="search-container">
+        <input class="search-field" type="text" id="searchInput" placeholder="Search articles...">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
 
-<select id="sortSelect">
-    <option value disabled selected>Sort by</option>
-    <option value="newest">Newest</option>
-    <option value="oldest">Oldest</option>
-</select>
+<!--
+    <button class="search-btn" onclick="search()">Search</button>
+-->
+    <div>
+        <select id="sortSelect">
+            <option value disabled selected>Sort by</option>
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+        </select>
 
-<select id="tagSelect">
-    <option value disabled selected>Tags</option>
-    <option value="all">All</option>
-    <option value="Tech">Tech</option>
-    <option value="AI">AI</option>
-    <option value="Coding">Coding</option>
-    <option value="New">New</option>
-</select>
+        <select id="tagSelect">
+            <option value disabled selected>Tags</option>
+            <option value="all">All</option>
+            <option value="Tech">Tech</option>
+            <option value="AI">AI</option>
+            <option value="Coding">Coding</option>
+            <option value="New">New</option>
+        </select>
+    </div>
+</div>
+
 
 <div class="articleContainer" id="articleDisplay">
 </div>
