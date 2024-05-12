@@ -15,11 +15,9 @@ fetch(apiArticleById)
 
 function displayArticle(article) {
     const articleDisplay = document.getElementById('articleDisplay');
-
     const updatedDate = new Date(article.data.updated);
     const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
     const authorName = article.data.author.name.replace(/_/g, ' ');
-
     const currentUrl = window.location.href;
 
     articleDisplay.innerHTML = `
@@ -28,9 +26,72 @@ function displayArticle(article) {
         <p>${formattedDate}</p>
         <p>${authorName}</p>
         ${article.data.media ? `<img src="${article.data.media.url}" alt="${article.data.media.alt}">` : ''}
-        <button class="deleteBtn" data-id="${article.data.id}">Delete</button>
+        ${loggedIn() ? `<button class="deleteBtn" data-id="${article.data.id}">Delete</button>` : ''}
         <button onclick="copyClipboard('${currentUrl}')"><i class="fa-solid fa-link"></i></button>
+        ${loggedIn() ? `<button class="editBtn" data-id="${article.data.id}">Edit</button>` : ''}
     `;
+
+    const editButton = articleDisplay.querySelector('.editBtn');
+    editButton.addEventListener('click', () => {
+        editForm(article);
+    });
+}
+
+function loggedIn() {
+    const accessToken = sessionStorage.getItem('Session key');
+    return accessToken !== null;
+}
+
+function editForm(article) {
+    const articleDisplay = document.getElementById('articleDisplay');
+
+    const editForm = document.createElement('form');
+    editForm.innerHTML = `
+        <input type="hidden" name="articleId" value="${article.data.id}">
+        <label for="editTitle">Title:</label>
+        <input type="text" id="editTitle" name="title" value="${article.data.title}" required>
+        <label for="editBody">Body:</label>
+        <textarea id="editBody" name="body" rows="4" required>${article.data.body}</textarea>
+        <label for="editMediaUrl">Media URL:</label>
+        <input type="text" id="editMediaUrl" name="mediaUrl" value="${article.data.media ? article.data.media.url : ''}">
+        <button type="submit">Save Changes</button>
+    `;
+
+    editForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(editForm);
+        const updatedArticleData = {
+            title: formData.get('title'),
+            body: formData.get('body'),
+            media: {
+                url: formData.get('mediaUrl')
+            }
+        };
+        const articleId = formData.get('articleId');
+        putRequest(articleId, updatedArticleData);
+    });
+
+    articleDisplay.innerHTML = '';
+    articleDisplay.appendChild(editForm);
+}
+
+function putRequest(articleId, updatedArticleData) {
+    const putOptions = {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${bearerToken}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedArticleData)
+    };
+    fetch(`https://v2.api.noroff.dev/blog/posts/Tom_Christer/${articleId}`, putOptions)
+        .then(response => response.json())
+        .then(data => {
+            displayArticle(data);
+        })
+        .catch(error => {
+            console.error('Error updating article:', error);
+        });
 }
 
 function copyClipboard (url) {
@@ -67,4 +128,5 @@ function deleteArticle() {
             console.error('Error deleting article:', error);
         });
 }
+
 

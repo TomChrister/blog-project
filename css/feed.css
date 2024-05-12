@@ -7,6 +7,7 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: Montserrat, sans-serif;
 }
 
 #articleDisplay {
@@ -51,22 +52,11 @@ body {
         height: 178px;
         object-fit: cover;
     }
-
-    /*.articleContainer {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0;
-    }*/
-
-    /*.grid-img {
-        width: 250px;
-        height: 124px;
-    }*/
 }
 
 @media screen and (min-width: 650px) and (max-width: 1800px){
     .articles-carousel img {
-        width: 556px;
+        width: 74vw;
         height: 290px;
         object-fit: cover;
     }
@@ -74,6 +64,7 @@ body {
 
 #carouselContainer {
     position: relative;
+    background-image: url('../assets/images/bc.jpg');
 }
 
 #carousel {
@@ -81,7 +72,7 @@ body {
     overflow: hidden;
     scroll-snap-type: x mandatory;
     white-space: nowrap;
-    padding: 0 0 16px 0;
+    padding: 16px 0 16px 0;
 }
 
 .articles-carousel {
@@ -104,6 +95,7 @@ body {
 
 .content-container img {
     border-radius: 4px;
+    box-shadow: 0 0 25px black
 }
 
 .content-container h2 {
@@ -111,7 +103,27 @@ body {
     top: 32%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
+    color: white;
+    filter: drop-shadow(2px 4px 6px black);
+    font-size: 40px;
+}
+
+/*.content-container p {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 18px;
+}*/
+
+.content-container .author {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 18px;
 }
 
 
@@ -126,16 +138,72 @@ body {
 
 .carouselBtn i {
     font-size: 36px;
-    border: none;
-    color: grey;
+    color: white;
 }
 
 #leftBtn {
-    left: 10px;
+    left: 16px;
 }
 
 #rightBtn {
-    right: 10px;
+    right: 16px;
 }
 
+.articles h2 {
+    font-size: 18px;
+}
 
+.body-p {
+    padding: 4px 0 4px 0;
+}
+
+.search-field {
+    font-family: Roboto, sans-serif;
+    height: 32px;
+    width: 238px;
+    border: 1px solid;
+    border-radius: 4px;
+    padding: 0 0 0 8px;
+}
+
+.search-btn {
+    height: 32px;
+    width: 58px;
+    border: 1px solid;
+    border-radius: 4px;
+}
+
+#sortSelect {
+    height: 32px;
+    width: 74px;
+    border: 1px solid;
+    border-radius: 4px;
+    opacity: 0.5;
+}
+
+#tagSelect {
+    height: 32px;
+    width: 74px;
+    border: 1px solid;
+    border-radius: 4px;
+    opacity: 0.5;
+}
+
+.input-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 16px 0 0 0;
+}
+
+.search-container {
+    position: relative;
+}
+
+.search-container i {
+    position: absolute;
+    top: 50%;
+    left: 88%;
+    transform: translateY(-50%);
+    opacity: 0.5;
+}

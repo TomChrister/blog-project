@@ -6,6 +6,9 @@
     <title>Title</title>
     <link href="css/feed.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/fe924a0d6e.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -21,40 +24,49 @@
     <div>
         <ul>
             <li>Articles</li>
-            <li><a href="post/edit.html">Create new post</a></li>
+            <li><a id="newPost" href="post/edit.html">Create post</a></li>
+            <li>Pricing</li>
+            <li>About</li>
         </ul>
     </div>
-    <div>
-        <ul>
-            <li>
-                User
-            </li>
-        </ul>
-    </div>
+    <a id="loginAnchor" href="account/login.html">
+    </a>
 </header>
 
 <div id="carouselContainer">
     <div id="carousel" class="carousel">
     </div>
-    <button id="leftBtn" class="carouselBtn"><i class="fa-solid fa-circle-chevron-left"></i></button>
-    <button id="rightBtn" class="carouselBtn"><i class="fa-solid fa-circle-chevron-right"></i></button>
+    <button id="leftBtn" class="carouselBtn"><i class="fa-solid fa-chevron-left"></i></i></button>
+    <button id="rightBtn" class="carouselBtn"><i class="fa-solid fa-chevron-right"></i></button>
 </div>
 
+<div class="input-container">
+    <div class="search-container">
+        <input class="search-field" type="text" id="searchInput" placeholder="Search articles...">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </div>
 
+<!--
+    <button class="search-btn" onclick="search()">Search</button>
+-->
+    <div>
+        <select id="sortSelect">
+            <option value disabled selected>Sort by</option>
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+        </select>
 
-<button id="newestBtn">Sort by newest</button>
-<button id="oldestBtn">Sort by oldest</button>
+        <select id="tagSelect">
+            <option value disabled selected>Tags</option>
+            <option value="all">All</option>
+            <option value="Tech">Tech</option>
+            <option value="AI">AI</option>
+            <option value="Coding">Coding</option>
+            <option value="New">New</option>
+        </select>
+    </div>
+</div>
 
-<select id="tagSelect">
-    <option value="all">All</option>
-    <option value="Tech">Tech</option>
-    <option value="AI">AI</option>
-    <option value="Coding">Coding</option>
-    <option value="New">New</option>
-</select>
-
-<input type="text" id="searchInput" placeholder="Search articles...">
-<button onclick="search()">Search</button>
 
 <div class="articleContainer" id="articleDisplay">
 </div>

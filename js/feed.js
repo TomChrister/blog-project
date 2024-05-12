@@ -3,6 +3,10 @@ const carouselContainer = document.getElementById('carousel');
 let carouselArticleIds = [];
 let articlesData = [];
 let currentTag = 'all';
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
+let scrollPosition = 0;
+const articleWidth = carouselContainer.offsetWidth;
 
 fetch(apiArticle)
     .then((response) => response.json())
@@ -21,11 +25,17 @@ function carouselDisplay(data) {
     carouselArticleIds = [];
 
     data.slice(0, 3).forEach((post) => {
+
+        const updatedDate = new Date(post.updated);
+        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()}`;
+        const authorName = post.author.name.replace(/_/g, ' ');
+
         const div = document.createElement("div");
         div.classList.add("articles-carousel");
         div.innerHTML = `
             <div class="content-container">
             <h2><a href="article.html?id=${post.id}">${post.title}</a></h2>
+            <p class="author">${authorName} • ${formattedDate}</p>
             ${post.media ? `<img src="${post.media.url}" alt="${post.media.alt}">` : ''}
             </div>
         `;
@@ -52,7 +62,7 @@ function articleGrid(data) {
             <div class="content-wrapper">
                 <a href="article.html?id=${post.id}">${post.media ? `<img class="grid-img" src="${post.media.url}" alt="${post.media.alt}">` : ''}</a>
                 <h2>${post.title}</h2>
-                <p>${post.body}</p>
+                <p class="body-p">${post.body}</p>
                 <p>${authorName} • ${formattedDate}</p>
             </div>
         `;
@@ -102,9 +112,28 @@ function sortByOldest() {
     }
     articleGrid(sortedData);
 }
+sortByNewest();
+sortByOldest();
 
-document.getElementById('newestBtn').addEventListener('click', sortByNewest);
-document.getElementById('oldestBtn').addEventListener('click', sortByOldest);
+
+function sortArticles(order) {
+    let sortedData;
+    if (order === 'newest') {
+        sortedData = [...articlesData].sort((a, b) => new Date(b.created) - new Date(a.created));
+    } else if (order === 'oldest') {
+        sortedData = [...articlesData].sort((a, b) => new Date(a.created) - new Date(b.created));
+    }
+
+    if (currentTag !== 'all') {
+        sortedData = sortedData.filter(article => article.tags && article.tags.includes(currentTag));
+    }
+    articleGrid(sortedData);
+}
+
+document.getElementById('sortSelect').addEventListener('change', function() {
+    const selectedOption = this.value;
+    sortArticles(selectedOption);
+});
 
 function sortByTag(tag) {
     currentTag = tag;
@@ -120,11 +149,6 @@ document.getElementById('tagSelect').addEventListener('change', (event) => {
     const selectedTag = event.target.value;
     sortByTag(selectedTag);
 });
-
-const leftBtn = document.getElementById("leftBtn");
-const rightBtn = document.getElementById("rightBtn");
-let scrollPosition = 0;
-const articleWidth = carouselContainer.offsetWidth;
 
 leftBtn.addEventListener("click", scrollLeft);
 rightBtn.addEventListener("click", scrollRight);
@@ -151,3 +175,41 @@ function scrollRight() {
     });
 }
 
+function loggedIn() {
+    const accessToken = sessionStorage.getItem('Session key');
+    return accessToken !== null;
+}
+
+function updateHeader() {
+    const loginAnchor = document.getElementById('loginAnchor');
+
+    if (loggedIn()) {
+        loginAnchor.textContent = 'Log out';
+        loginAnchor.href = 'index.html';
+    } else {
+        loginAnchor.textContent = 'Login';
+        loginAnchor.href = 'account/login.html'
+    }
+}
+updateHeader();
+
+function logout() {
+    sessionStorage.removeItem('Session key');
+    window.location.href = 'index.html';
+}
+
+const logoutBtn = document.getElementById('loginAnchor');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', logout);
+}
+
+const newPostBtn = document.getElementById('newPost');
+if (newPostBtn) {
+    newPostBtn.addEventListener('click', function(event) {
+        if (!loggedIn()) {
+            event.preventDefault();
+            alert('You need to be logged in to create a post. Click OK to go to login page.');
+            window.location.href = 'account/login.html';
+        }
+    });
+}
