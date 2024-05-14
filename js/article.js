@@ -22,13 +22,21 @@ function displayArticle(article) {
 
     articleDisplay.innerHTML = `
         <h2>${article.data.title}</h2>
-        <p>${article.data.body}</p>
-        <p>${formattedDate}</p>
-        <p>${authorName}</p>
-        ${article.data.media ? `<img src="${article.data.media.url}" alt="${article.data.media.alt}">` : ''}
-        ${loggedIn() ? `<button class="deleteBtn" data-id="${article.data.id}">Delete</button>` : ''}
-        <button onclick="copyClipboard('${currentUrl}')"><i class="fa-solid fa-link"></i></button>
-        ${loggedIn() ? `<button class="editBtn" data-id="${article.data.id}">Edit</button>` : ''}
+            <div>
+                ${article.data.media ? `<img src="${article.data.media.url}" alt="${article.data.media.alt}">` : ''}
+            </div>
+        <div class="author-edit-delete">
+            <p>${authorName} • ${formattedDate}</p>
+                <div>
+                    ${loggedIn() ? `<button class="editBtn" data-id="${article.data.id}">Edit</button>` : ''}
+                    ${loggedIn() ? `<button class="deleteBtn" data-id="${article.data.id}" onclick="confirmDelete(event)">Delete</button>` : ''}
+                </div>
+        </div>    
+            <p>${article.data.tags}</p>
+            <div>
+                <button onclick="copyClipboard('${currentUrl}')">Share</button>
+            </div>
+        <p>${article.data.body}</p>    
     `;
 
     const editButton = articleDisplay.querySelector('.editBtn');
@@ -129,4 +137,26 @@ function deleteArticle() {
         });
 }
 
+function updateHeader() {
+    const loginAnchor = document.getElementById('loginAnchor');
+
+    if (loggedIn()) {
+        loginAnchor.textContent = 'Log out';
+        loginAnchor.href = 'index.html';
+    } else {
+        loginAnchor.textContent = 'Login';
+        loginAnchor.href = 'account/login.html'
+    }
+}
+updateHeader();
+
+function logout() {
+    sessionStorage.removeItem('Session key');
+    window.location.href = 'index.html';
+}
+
+const logoutBtn = document.getElementById('loginAnchor');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', logout);
+}
 

@@ -1,5 +1,55 @@
 @import "header.css";
 
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Montserrat, sans-serif;
+}
+
 img {
     width: 150px;
+}
+
+#articleDisplay {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 16px 16px 16px;
+}
+
+#articleDisplay img {
+    width: 100%;
+    height: 334px;
+    object-fit: cover;
+}
+
+#articleDisplay h2 {
+    padding: 0 0 8px 0;
+}
+
+.author-edit-delete {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0 8px 0;
+}
+
+.editBtn, .deleteBtn {
+    border: none;
+    background: none;
+    font-size: 14px;
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.deleteBtn {
+    padding-left: 8px;
+}
+
+.deleteBtn:hover {
+    opacity: 1;
+}
+
+.editBtn:hover {
+    opacity: 1;
 }

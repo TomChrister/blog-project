@@ -25,7 +25,6 @@ function carouselDisplay(data) {
     carouselArticleIds = [];
 
     data.slice(0, 3).forEach((post) => {
-
         const updatedDate = new Date(post.updated);
         const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()}`;
         const authorName = post.author.name.replace(/_/g, ' ');
@@ -56,13 +55,17 @@ function articleGrid(data) {
         const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()}`;
         const authorName = post.author.name.replace(/_/g, ' ');
 
+        const maxWords = 6;
+        const words = post.body.split(" ");
+        const introduction = words.length > maxWords ? words.slice(0, maxWords).join(" ") : post.body;
+
         const div = document.createElement("div");
         div.classList.add("articles");
         div.innerHTML = `
             <div class="content-wrapper">
                 <a href="article.html?id=${post.id}">${post.media ? `<img class="grid-img" src="${post.media.url}" alt="${post.media.alt}">` : ''}</a>
                 <h2>${post.title}</h2>
-                <p class="body-p">${post.body}</p>
+                <p class="body-p">${introduction}</p>
                 <p>${authorName} • ${formattedDate}</p>
             </div>
         `;
