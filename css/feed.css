@@ -197,6 +197,16 @@ body {
     opacity: 1;
 }
 
+#tagSelect option {
+    background-color: white;
+    color: black;
+}
+
+#sortSelect option {
+    background-color: white;
+    color: black;
+}
+
 .input-container {
     display: flex;
     justify-content: center;
