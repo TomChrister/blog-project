@@ -19,19 +19,17 @@ img {
 }
 
 #articleDisplay img {
-    width: 100%;
+    width: 80%;
     height: 334px;
     object-fit: cover;
-}
-
-#articleDisplay h2 {
-    padding: 0 0 8px 0;
+    border-radius: 2px;
 }
 
 .author-edit-delete {
     display: flex;
     justify-content: space-between;
     padding: 8px 0 8px 0;
+    font-size: 14px;
 }
 
 .editBtn, .deleteBtn {
@@ -52,4 +50,72 @@ img {
 
 .editBtn:hover {
     opacity: 1;
+}
+
+.tags-and-share {
+    display: flex;
+    gap: 8px;
+    padding: 0 0 12px 0;
+    align-items: center;
+    font-size: 14px;
+}
+
+.share-btn {
+    border: 1px solid;
+    border-radius: 8px;
+    width: 58px;
+    height: 22px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.hr-line {
+    opacity: 0.5;
+    width: 88%;
+    align-self: center;
+}
+
+.article-text {
+    font-size: 18px;
+    padding: 12px 0 0 0;
+    width: 50%;
+    align-self: center;
+}
+
+.article-text p {
+    margin: 0 0 16px 0;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.img-container img {
+    display: block;
+    margin: 0 auto;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.content-wrapper h2 {
+    text-align: left;
+    width: 80%;
+    padding: 0 0 8px 0;
+    font-weight: 600;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between; /
+    align-items: center;
+    width: 80%;
+    margin: auto;
+    text-align: left;
 }

@@ -21,28 +21,35 @@ function displayArticle(article) {
     const currentUrl = window.location.href;
 
     articleDisplay.innerHTML = `
-        <h2>${article.data.title}</h2>
-            <div>
+        <div class="content-wrapper">
+            <h2>${article.data.title}</h2>
+            <div class="img-container">
                 ${article.data.media ? `<img src="${article.data.media.url}" alt="${article.data.media.alt}">` : ''}
             </div>
-        <div class="author-edit-delete">
+        </div>
+        <div class="author-edit-delete flex-container">
             <p>${authorName} • ${formattedDate}</p>
                 <div>
                     ${loggedIn() ? `<button class="editBtn" data-id="${article.data.id}">Edit</button>` : ''}
-                    ${loggedIn() ? `<button class="deleteBtn" data-id="${article.data.id}" onclick="confirmDelete(event)">Delete</button>` : ''}
+                    ${loggedIn() ? `<button class="deleteBtn" data-id="${article.data.id}">Delete</button>` : ''}
                 </div>
-        </div>    
-            <p>${article.data.tags}</p>
-            <div>
-                <button onclick="copyClipboard('${currentUrl}')">Share</button>
-            </div>
-        <p>${article.data.body}</p>    
+        </div>  
+        <div class="tags-and-share flex-container">
+            <p>Tags: ${article.data.tags}</p> •
+            <button class="share-btn" onclick="copyClipboard('${currentUrl}')">Share</button>
+        </div>  
+        <hr class="hr-line">
+        <div class="article-text">${formatArticleBody(article.data.body)}</div>   
     `;
 
     const editButton = articleDisplay.querySelector('.editBtn');
     editButton.addEventListener('click', () => {
         editForm(article);
     });
+}
+
+function formatArticleBody(text) {
+    return text.split('\n').map(paragraph => `<p>${paragraph}</p>`).join('');
 }
 
 function loggedIn() {
@@ -52,7 +59,6 @@ function loggedIn() {
 
 function editForm(article) {
     const articleDisplay = document.getElementById('articleDisplay');
-
     const editForm = document.createElement('form');
     editForm.innerHTML = `
         <input type="hidden" name="articleId" value="${article.data.id}">
