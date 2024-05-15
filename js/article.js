@@ -16,7 +16,8 @@ fetch(apiArticleById)
 function displayArticle(article) {
     const articleDisplay = document.getElementById('articleDisplay');
     const updatedDate = new Date(article.data.updated);
-    const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
+    const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
+    const formattedDate =  updatedDate.toLocaleDateString('en-GB', options);
     const authorName = article.data.author.name.replace(/_/g, ' ');
     const currentUrl = window.location.href;
 
@@ -29,14 +30,14 @@ function displayArticle(article) {
         </div>
         <div class="author-edit-delete flex-container">
             <p>${authorName} • ${formattedDate}</p>
-                <div>
-                    ${loggedIn() ? `<button class="editBtn" data-id="${article.data.id}">Edit</button>` : ''}
-                    ${loggedIn() ? `<button class="deleteBtn" data-id="${article.data.id}">Delete</button>` : ''}
-                </div>
+            <div>
+                <button class="shareBtn" onclick="copyClipboard('${currentUrl}')">Share</button>
+                ${loggedIn() ? `<button class="editBtn" data-id="${article.data.id}">Edit</button>` : ''}
+                ${loggedIn() ? `<button class="deleteBtn" data-id="${article.data.id}">Delete</button>` : ''}
+             </div>
         </div>  
         <div class="tags-and-share flex-container">
-            <p>Tags: ${article.data.tags}</p> •
-            <button class="share-btn" onclick="copyClipboard('${currentUrl}')">Share</button>
+            <p>Category • ${article.data.tags}</p> •
         </div>  
         <hr class="hr-line">
         <div class="article-text">${formatArticleBody(article.data.body)}</div>   
@@ -60,14 +61,19 @@ function loggedIn() {
 function editForm(article) {
     const articleDisplay = document.getElementById('articleDisplay');
     const editForm = document.createElement('form');
+    editForm.classList.add('edit-form')
     editForm.innerHTML = `
+        <h1>Edit article</h1>
         <input type="hidden" name="articleId" value="${article.data.id}">
         <label for="editTitle">Title:</label>
         <input type="text" id="editTitle" name="title" value="${article.data.title}" required>
         <label for="editBody">Body:</label>
         <textarea id="editBody" name="body" rows="4" required>${article.data.body}</textarea>
+        <label for="editTags">Tag:</label>
+        <input type="text" id="editTags" name="tag" value="${article.data.tags.join(', ')}">
         <label for="editMediaUrl">Media URL:</label>
         <input type="text" id="editMediaUrl" name="mediaUrl" value="${article.data.media ? article.data.media.url : ''}">
+        <p>Note: When adding an image, please use links to a live and publicly accessible image with <span class="https">https://</span></p>
         <button type="submit">Save Changes</button>
     `;
 
@@ -77,6 +83,7 @@ function editForm(article) {
         const updatedArticleData = {
             title: formData.get('title'),
             body: formData.get('body'),
+            tags: formData.get('tag').split(',').map(tag => tag.trim()),
             media: {
                 url: formData.get('mediaUrl')
             }

@@ -154,7 +154,7 @@ body {
 }
 
 .body-p {
-    padding: 4px 0 4px 0;
+    padding: 4px 0 12px 0;
 }
 
 .search-field {
@@ -189,6 +189,10 @@ body {
     opacity: 0.5;
 }
 
+#sortSelect:hover, #tagSelect:hover {
+    opacity: 1;
+}
+
 .input-container {
     display: flex;
     justify-content: center;
@@ -207,3 +211,4 @@ body {
     transform: translateY(-50%);
     opacity: 0.5;
 }
+

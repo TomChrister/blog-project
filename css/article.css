@@ -20,19 +20,21 @@ img {
 
 #articleDisplay img {
     width: 80%;
-    height: 334px;
+    height: 386px;
     object-fit: cover;
     border-radius: 2px;
 }
 
 .author-edit-delete {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0 8px 0;
+    padding: 8px 0 4px 0;
     font-size: 14px;
 }
 
-.editBtn, .deleteBtn {
+.author-edit-delete p {
+    letter-spacing: 1.2px;
+}
+
+.editBtn, .deleteBtn, .shareBtn {
     border: none;
     background: none;
     font-size: 14px;
@@ -40,8 +42,8 @@ img {
     cursor: pointer;
 }
 
-.deleteBtn {
-    padding-left: 8px;
+.editBtn {
+    padding: 0 8px 0 8px;
 }
 
 .deleteBtn:hover {
@@ -49,6 +51,10 @@ img {
 }
 
 .editBtn:hover {
+    opacity: 1;
+}
+
+.shareBtn:hover {
     opacity: 1;
 }
 
@@ -60,13 +66,8 @@ img {
     font-size: 14px;
 }
 
-.share-btn {
-    border: 1px solid;
-    border-radius: 8px;
-    width: 58px;
-    height: 22px;
-    cursor: pointer;
-    font-size: 12px;
+.tags-and-share p {
+    letter-spacing: 1.2px;
 }
 
 .hr-line {
@@ -77,9 +78,11 @@ img {
 
 .article-text {
     font-size: 18px;
-    padding: 12px 0 0 0;
-    width: 50%;
+    padding: 12px 20px 0 20px;
+    width: 68%;
     align-self: center;
+    line-height: 24px;
+    letter-spacing: 1px;
 }
 
 .article-text p {
@@ -118,4 +121,68 @@ img {
     width: 80%;
     margin: auto;
     text-align: left;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto, sans-serif;
+}
+
+.edit-form input {
+    margin: 4px 0 18px 0;
+    width: 50%;
+    height: 28px;
+    border-radius: 4px;
+    border: 1px solid;
+    padding: 0 0 0 8px;
+}
+
+.edit-form textarea {
+    width: 50%;
+    height: 200px;
+    margin: 4px 0 18px 0;
+    padding: 4px 0 0 8px;
+}
+
+.edit-form label {
+    font-size: 20px;
+}
+
+.edit-form button {
+    width: 9%;
+    height: 26px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: #008000c2;
+}
+
+.edit-form button:hover {
+    background-color: #008000;
+}
+
+#editMediaUrl {
+    margin: 4px 0 0 0;
+    width: 50%;
+    height: 28px;
+    border-radius: 4px;
+    border: 1px solid;
+    padding: 0 0 0 8px;
+}
+
+.edit-form p {
+    font-size: 12px;
+    padding: 4px 0 18px 0;
+}
+
+.edit-form h1 {
+    font-size: 28px;
+    font-weight: 600;
+    padding: 0 0 8px 0;
+}
+
+.https {
+    color: red;
 }

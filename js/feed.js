@@ -26,7 +26,8 @@ function carouselDisplay(data) {
 
     data.slice(0, 3).forEach((post) => {
         const updatedDate = new Date(post.updated);
-        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()}`;
+        const options = { day: 'numeric', month: 'long', year: 'numeric'};
+        const formattedDate = updatedDate.toLocaleDateString('en-GB', options);
         const authorName = post.author.name.replace(/_/g, ' ');
 
         const div = document.createElement("div");
@@ -51,11 +52,12 @@ function articleGrid(data) {
         if (carouselArticleIds.includes(post.id)) {
             return;
         }
-        const updatedDate = new Date(post.updated);
-        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()}`;
+        const updatedDate = new Date(post.created);
+        const options = { day: 'numeric', month: 'long', year: 'numeric'};
+        const formattedDate = updatedDate.toLocaleDateString('en-GB', options);
         const authorName = post.author.name.replace(/_/g, ' ');
 
-        const maxWords = 6;
+        const maxWords = 4;
         const words = post.body.split(" ");
         const introduction = words.length > maxWords ? words.slice(0, maxWords).join(" ") : post.body;
 
