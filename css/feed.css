@@ -64,7 +64,7 @@ body {
 
 #carouselContainer {
     position: relative;
-    background-image: url('../assets/images/bc.jpg');
+    background-image: url('../assets/images/bc82.jpg');
 }
 
 #carousel {
@@ -176,17 +176,21 @@ body {
 #sortSelect {
     height: 32px;
     width: 74px;
-    border: 1px solid;
+    border: 1px solid #4D4730;
     border-radius: 4px;
     opacity: 0.5;
+    background-color: #4D4730;
+    color: white;
 }
 
 #tagSelect {
     height: 32px;
     width: 74px;
-    border: 1px solid;
+    border: 1px solid #4D4730;
     border-radius: 4px;
     opacity: 0.5;
+    background-color: #4D4730;
+    color: white;
 }
 
 #sortSelect:hover, #tagSelect:hover {
