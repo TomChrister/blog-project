@@ -13,6 +13,8 @@ fetch(apiArticleById)
         console.error('Error fetching article:', error);
     });
 
+
+// Display article
 function displayArticle(article) {
     const articleDisplay = document.getElementById('articleDisplay');
     const updatedDate = new Date(article.data.updated);
@@ -53,11 +55,8 @@ function formatArticleBody(text) {
     return text.split('\n').map(paragraph => `<p>${paragraph}</p>`).join('');
 }
 
-function loggedIn() {
-    const accessToken = sessionStorage.getItem('Session key');
-    return accessToken !== null;
-}
 
+// Edit article function
 function editForm(article) {
     const articleDisplay = document.getElementById('articleDisplay');
     const editForm = document.createElement('form');
@@ -99,11 +98,24 @@ function editForm(article) {
         const articleId = formData.get('articleId');
         putRequest(articleId, updatedArticleData);
     });
-
     articleDisplay.innerHTML = '';
     articleDisplay.appendChild(editForm);
 }
 
+
+// Share function
+function copyClipboard (url) {
+    const el = document.createElement('textarea');
+    el.value = url;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    alert('Link copied to clipboard!');
+}
+
+
+// PUT and DELETE requests
 function putRequest(articleId, updatedArticleData) {
     const putOptions = {
         method: 'PUT',
@@ -121,16 +133,6 @@ function putRequest(articleId, updatedArticleData) {
         .catch(error => {
             console.error('Error updating article:', error);
         });
-}
-
-function copyClipboard (url) {
-    const el = document.createElement('textarea');
-    el.value = url;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    alert('Link copied to clipboard!');
 }
 
 document.addEventListener('click', function(event) {
@@ -158,6 +160,13 @@ function deleteArticle() {
         });
 }
 
+
+// Login and accessToken functions
+function loggedIn() {
+    const accessToken = sessionStorage.getItem('Session key');
+    return accessToken !== null;
+}
+
 function updateHeader() {
     const loginAnchor = document.getElementById('loginAnchor');
 
@@ -180,4 +189,3 @@ const logoutBtn = document.getElementById('loginAnchor');
 if (logoutBtn) {
     logoutBtn.addEventListener('click', logout);
 }
-

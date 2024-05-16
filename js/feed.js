@@ -19,6 +19,7 @@ fetch(apiArticle)
         console.error('Error fetching data:', error);
     });
 
+// Carousel and grid display
 function carouselDisplay(data) {
     const carouselContainer = getCarouselContainer();
     carouselContainer.innerHTML = '';
@@ -76,17 +77,6 @@ function articleGrid(data) {
     });
 }
 
-function search() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const filteredArticles = articlesData.filter(article =>
-        article.title.toLowerCase().includes(query) ||
-        (article.tags && article.tags.some(tag => tag.toLowerCase().includes(query)))
-    );
-    articleGrid(filteredArticles);
-}
-
-document.getElementById('searchInput').addEventListener('input', search);
-
 function getArticleDisplay() {
     return document.getElementById('articleDisplay');
 }
@@ -95,17 +85,14 @@ function getCarouselContainer() {
     return document.getElementById('carousel');
 }
 
-function updateArticleWidth() {
-    const articleElement = document.querySelector('.articles-carousel');
-    articleWidth = articleElement ? articleElement.offsetWidth : 0;
-}
-
 function append(data) {
     articlesData = data;
     carouselDisplay(data);
     articleGrid(data);
 }
 
+
+// Sort, filtering and search functions
 function sortByNewest() {
     let sortedData = [...articlesData].sort((a, b) => new Date(b.created) - new Date(a.created));
 
@@ -125,7 +112,6 @@ function sortByOldest() {
 }
 sortByNewest();
 sortByOldest();
-
 
 function sortArticles(order) {
     let sortedData;
@@ -161,6 +147,18 @@ document.getElementById('tagSelect').addEventListener('change', (event) => {
     sortByTag(selectedTag);
 });
 
+function search() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const filteredArticles = articlesData.filter(article =>
+        article.title.toLowerCase().includes(query) ||
+        (article.tags && article.tags.some(tag => tag.toLowerCase().includes(query)))
+    );
+    articleGrid(filteredArticles);
+}
+document.getElementById('searchInput').addEventListener('input', search);
+
+
+// Carousel scrolling functions
 leftBtn.addEventListener("click", scrollLeft);
 rightBtn.addEventListener("click", scrollRight);
 
@@ -186,6 +184,13 @@ function scrollRight() {
     });
 }
 
+function updateArticleWidth() {
+    const articleElement = document.querySelector('.articles-carousel');
+    articleWidth = articleElement ? articleElement.offsetWidth : 0;
+}
+
+
+// Login and accessToken functions
 function loggedIn() {
     const accessToken = sessionStorage.getItem('Session key');
     return accessToken !== null;
