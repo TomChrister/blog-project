@@ -6,7 +6,7 @@ let currentTag = 'all';
 const leftBtn = document.getElementById("leftBtn");
 const rightBtn = document.getElementById("rightBtn");
 let scrollPosition = 0;
-const articleWidth = carouselContainer.offsetWidth;
+let articleWidth = 0;
 
 fetch(apiArticle)
     .then((response) => response.json())
@@ -42,6 +42,7 @@ function carouselDisplay(data) {
         carouselContainer.appendChild(div);
         carouselArticleIds.push(post.id);
     });
+    updateArticleWidth();
 }
 
 function articleGrid(data) {
@@ -92,6 +93,11 @@ function getArticleDisplay() {
 
 function getCarouselContainer() {
     return document.getElementById('carousel');
+}
+
+function updateArticleWidth() {
+    const articleElement = document.querySelector('.articles-carousel');
+    articleWidth = articleElement ? articleElement.offsetWidth : 0;
 }
 
 function append(data) {

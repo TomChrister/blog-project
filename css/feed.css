@@ -1,4 +1,5 @@
 @import "header.css";
+@import "footer.css";
 
 * {
     box-sizing: border-box;
@@ -46,11 +47,38 @@ body {
     object-fit: cover;
 }
 
+.content-container h2 {
+    position: absolute;
+    top: 32%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    filter: drop-shadow(2px 4px 6px black);
+    font-size: 40px;
+}
+
+.content-container .author {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 18px;
+}
+
 @media screen and (min-width: 430px) and (max-width: 800px){
     .articles-carousel img {
-        width: 412px;
-        height: 178px;
+        width: 320px;
+        height: 156px;
         object-fit: cover;
+    }
+
+    .content-container h2 {
+        font-size: 22px;
+    }
+
+    .content-container .author {
+        font-size: 12px;
     }
 }
 
@@ -98,35 +126,6 @@ body {
     box-shadow: 0 0 25px black
 }
 
-.content-container h2 {
-    position: absolute;
-    top: 32%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    filter: drop-shadow(2px 4px 6px black);
-    font-size: 40px;
-}
-
-/*.content-container p {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 18px;
-}*/
-
-.content-container .author {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    font-size: 18px;
-}
-
-
 .carouselBtn {
     position: absolute;
     top: 50%;
@@ -147,6 +146,14 @@ body {
 
 #rightBtn {
     right: 16px;
+}
+
+#leftBtn i:hover {
+    opacity: 0.5;
+}
+
+#rightBtn i:hover {
+    opacity: 0.5;
 }
 
 .articles h2 {
@@ -216,6 +223,11 @@ body {
 
 .search-container {
     position: relative;
+    opacity: 0.5;
+}
+
+.search-container:hover {
+    opacity: 1;
 }
 
 .search-container i {
@@ -223,6 +235,9 @@ body {
     top: 50%;
     left: 88%;
     transform: translateY(-50%);
-    opacity: 0.5;
 }
 
+.btn-container {
+    display: flex;
+    justify-content: center;
+}

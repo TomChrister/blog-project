@@ -7,7 +7,7 @@
 header {
     display: flex;
     background-color: transparent;
-    height: 86px;
+    height: 60px;
     align-items: center;
     font-size: 1rem;
     justify-content: space-around;
@@ -44,6 +44,6 @@ li {
 }
 
 #loginAnchor:hover {
-    background-color: #7a7373;
+    background-color: #345f5d;
     transition: 2ms ease-in-out;
 }
