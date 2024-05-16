@@ -83,6 +83,19 @@ input[type="email"] {
     gap: 16px;
 }
 
+.terms-conditions p {
+    cursor: pointer;
+}
+
+.terms-conditions, .info {
+    opacity: 0.5;
+}
+
+.terms-conditions p:hover {
+    opacity: 1;
+    color: #345f5d;
+}
+
 .info {
     display: flex;
     flex-direction: column;
@@ -93,6 +106,24 @@ input[type="email"] {
     font-weight: 600;
 }
 
-.terms-conditions, .info {
-    opacity: 0.5;
+
+@media (max-width: 1000px) {
+    .form-container {
+        display: none;
+    }
+
+    footer {
+        padding: 16px 20px 30px 20px;
+    }
+
+    .hr {
+        width: 98%;
+    }
+}
+
+@media (max-width: 618px) {
+    .author-edit-delete {
+        flex-direction: column;
+        gap: 8px;
+    }
 }

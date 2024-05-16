@@ -70,7 +70,15 @@ function editForm(article) {
         <label for="editBody">Body:</label>
         <textarea id="editBody" name="body" rows="4" required>${article.data.body}</textarea>
         <label for="editTags">Tag:</label>
-        <input type="text" id="editTags" name="tag" value="${article.data.tags.join(', ')}">
+        <select id="editTags" name="tag">
+            <option value disabled selected>Select a tag</option>
+            <option value="AI">AI</option>
+            <option value="Code">Code</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="Gadgets">Gadgets</option>
+            <option value="Software development">Software development</option>
+            <option value="Technology">Technology</option>
+        </select>
         <label for="editMediaUrl">Media URL:</label>
         <input type="text" id="editMediaUrl" name="mediaUrl" value="${article.data.media ? article.data.media.url : ''}">
         <p>Note: When adding an image, please use links to a live and publicly accessible image with <span class="https">https://</span></p>

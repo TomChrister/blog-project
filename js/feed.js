@@ -1,10 +1,10 @@
 const apiArticle = 'https://v2.api.noroff.dev/blog/posts/Tom_Christer';
 const carouselContainer = document.getElementById('carousel');
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
 let carouselArticleIds = [];
 let articlesData = [];
 let currentTag = 'all';
-const leftBtn = document.getElementById("leftBtn");
-const rightBtn = document.getElementById("rightBtn");
 let scrollPosition = 0;
 let articleWidth = 0;
 
