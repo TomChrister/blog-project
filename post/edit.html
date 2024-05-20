@@ -29,23 +29,34 @@
     </a>
 </header>
 
-<h2>Create New Post</h2>
+<div class="body-container">
+    <h1>Create New Post</h1>
 
-<form id="newPostForm">
-    <label for="title">Title:</label><br>
-    <input type="text" id="title" name="title"><br>
+    <form id="newPostForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title">
 
-    <label for="body">Body:</label><br>
-    <textarea id="body" name="body"></textarea><br>
+        <label for="body">Body:</label>
+        <textarea id="body" name="body"></textarea>
 
-    <label for="tag">Tag:</label><br>
-    <input type="text" id="tag" name="tag"><br>
+        <label for="tag">Tag:</label>
+        <select id="tag" name="tag">
+            <option value disabled selected>Select a tag</option>
+            <option value="AI">AI</option>
+            <option value="Code">Code</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="Gadgets">Gadgets</option>
+            <option value="Software development">Software development</option>
+            <option value="Technology">Technology</option>
+        </select>
 
-    <label for="image_url">Image URL</label>
-    <input type="url" id="image_url" name="image_url">
+        <label for="image_url">Image URL:</label>
+        <input type="text" id="image_url" name="image_url">
+        <p class="note">Note: When adding an image, please use links to a live and publicly accessible image with <span class="https">https://</span></p>
 
-    <button type="submit">Submit</button>
-</form>
+        <button type="submit">Submit</button>
+    </form>
+</div>
 
 </body>
 </html>

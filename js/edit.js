@@ -2,6 +2,7 @@ const apiArticle = 'https://v2.api.noroff.dev/blog/posts/Tom_Christer';
 const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVG9tX0NocmlzdGVyIiwiZW1haWwiOiJ0b21zY2gwMTI2NkBzdHVkLm5vcm9mZi5ubyIsImlhdCI6MTcxMzM2MDU2M30.Pyo04wxqxm491vDWg9CMi8pug12fM07HWHCkPQjJFak';
 const newPostForm = document.getElementById('newPostForm');
 
+// Create post function
 newPostForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -40,6 +41,8 @@ newPostForm.addEventListener('submit', function(event) {
         });
 });
 
+
+// Login and accessToken functions
 function loggedIn() {
     const accessToken = sessionStorage.getItem('Session key');
     return accessToken !== null;

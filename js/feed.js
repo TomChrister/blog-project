@@ -1,17 +1,16 @@
 const apiArticle = 'https://v2.api.noroff.dev/blog/posts/Tom_Christer';
 const carouselContainer = document.getElementById('carousel');
+const leftBtn = document.getElementById("leftBtn");
+const rightBtn = document.getElementById("rightBtn");
 let carouselArticleIds = [];
 let articlesData = [];
 let currentTag = 'all';
-const leftBtn = document.getElementById("leftBtn");
-const rightBtn = document.getElementById("rightBtn");
 let scrollPosition = 0;
-const articleWidth = carouselContainer.offsetWidth;
+let articleWidth = 0;
 
 fetch(apiArticle)
     .then((response) => response.json())
     .then((data) => {
-        console.log('Data from API:', data);
         articlesData = data.data;
         append(articlesData);
     })
@@ -19,15 +18,16 @@ fetch(apiArticle)
         console.error('Error fetching data:', error);
     });
 
+// Carousel and grid display
 function carouselDisplay(data) {
     const carouselContainer = getCarouselContainer();
     carouselContainer.innerHTML = '';
     carouselArticleIds = [];
 
     data.slice(0, 3).forEach((post) => {
-
         const updatedDate = new Date(post.updated);
-        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()}`;
+        const options = { day: 'numeric', month: 'long', year: 'numeric'};
+        const formattedDate = updatedDate.toLocaleDateString('en-GB', options);
         const authorName = post.author.name.replace(/_/g, ' ');
 
         const div = document.createElement("div");
@@ -42,6 +42,7 @@ function carouselDisplay(data) {
         carouselContainer.appendChild(div);
         carouselArticleIds.push(post.id);
     });
+    updateArticleWidth();
 }
 
 function articleGrid(data) {
@@ -52,9 +53,14 @@ function articleGrid(data) {
         if (carouselArticleIds.includes(post.id)) {
             return;
         }
-        const updatedDate = new Date(post.updated);
-        const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()}`;
+        const updatedDate = new Date(post.created);
+        const options = { day: 'numeric', month: 'long', year: 'numeric'};
+        const formattedDate = updatedDate.toLocaleDateString('en-GB', options);
         const authorName = post.author.name.replace(/_/g, ' ');
+
+        const maxWords = 4;
+        const words = post.body.split(" ");
+        const introduction = words.length > maxWords ? words.slice(0, maxWords).join(" ") : post.body;
 
         const div = document.createElement("div");
         div.classList.add("articles");
@@ -62,24 +68,13 @@ function articleGrid(data) {
             <div class="content-wrapper">
                 <a href="article.html?id=${post.id}">${post.media ? `<img class="grid-img" src="${post.media.url}" alt="${post.media.alt}">` : ''}</a>
                 <h2>${post.title}</h2>
-                <p class="body-p">${post.body}</p>
+                <p class="body-p">${introduction}</p>
                 <p>${authorName} • ${formattedDate}</p>
             </div>
         `;
         articleDisplay.appendChild(div);
     });
 }
-
-function search() {
-    const query = document.getElementById('searchInput').value.toLowerCase();
-    const filteredArticles = articlesData.filter(article =>
-        article.title.toLowerCase().includes(query) ||
-        (article.tags && article.tags.some(tag => tag.toLowerCase().includes(query)))
-    );
-    articleGrid(filteredArticles);
-}
-
-document.getElementById('searchInput').addEventListener('input', search);
 
 function getArticleDisplay() {
     return document.getElementById('articleDisplay');
@@ -95,6 +90,8 @@ function append(data) {
     articleGrid(data);
 }
 
+
+// Sort, filtering and search functions
 function sortByNewest() {
     let sortedData = [...articlesData].sort((a, b) => new Date(b.created) - new Date(a.created));
 
@@ -114,7 +111,6 @@ function sortByOldest() {
 }
 sortByNewest();
 sortByOldest();
-
 
 function sortArticles(order) {
     let sortedData;
@@ -150,6 +146,18 @@ document.getElementById('tagSelect').addEventListener('change', (event) => {
     sortByTag(selectedTag);
 });
 
+function search() {
+    const query = document.getElementById('searchInput').value.toLowerCase();
+    const filteredArticles = articlesData.filter(article =>
+        article.title.toLowerCase().includes(query) ||
+        (article.tags && article.tags.some(tag => tag.toLowerCase().includes(query)))
+    );
+    articleGrid(filteredArticles);
+}
+document.getElementById('searchInput').addEventListener('input', search);
+
+
+// Carousel scrolling functions
 leftBtn.addEventListener("click", scrollLeft);
 rightBtn.addEventListener("click", scrollRight);
 
@@ -175,6 +183,13 @@ function scrollRight() {
     });
 }
 
+function updateArticleWidth() {
+    const articleElement = document.querySelector('.articles-carousel');
+    articleWidth = articleElement ? articleElement.offsetWidth : 0;
+}
+
+
+// Login and accessToken functions
 function loggedIn() {
     const accessToken = sessionStorage.getItem('Session key');
     return accessToken !== null;
@@ -182,7 +197,6 @@ function loggedIn() {
 
 function updateHeader() {
     const loginAnchor = document.getElementById('loginAnchor');
-
     if (loggedIn()) {
         loginAnchor.textContent = 'Log out';
         loginAnchor.href = 'index.html';
@@ -211,5 +225,12 @@ if (newPostBtn) {
             alert('You need to be logged in to create a post. Click OK to go to login page.');
             window.location.href = 'account/login.html';
         }
+    });
+}
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
 }

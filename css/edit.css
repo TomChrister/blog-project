@@ -1,2 +1,90 @@
 @import "header.css";
 
+body {
+    font-family: Roboto, sans-serif;
+}
+
+.body-container {
+    padding: 16px 16px 16px 16px;
+}
+
+#newPostForm {
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto, sans-serif;
+}
+
+#newPostForm input {
+    margin: 4px 0 18px 0;
+    width: 50%;
+    min-width: 350px;
+    height: 28px;
+    border-radius: 4px;
+    border: 1px solid;
+    padding: 0 0 0 8px;
+}
+
+#newPostForm textarea {
+    width: 50%;
+    min-width: 350px;
+    height: 200px;
+    margin: 4px 0 18px 0;
+    padding: 4px 0 0 8px;
+}
+
+#newPostForm select {
+    width: 50%;
+    min-width: 350px;
+    height: 28px;
+    border-radius: 4px;
+    border: 1px solid;
+    padding: 0 0 0 8px;
+    margin: 4px 0 18px 0;
+}
+
+#newPostForm label {
+    font-size: 20px;
+}
+
+#newPostForm button {
+    width: 108px;
+    height: 26px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    background-color: #008000c2;
+}
+
+#newPostForm button:hover {
+    background-color: #008000;
+}
+
+#newPostForm #image_url {
+    margin: 4px 0 0 0;
+    width: 50%;
+    height: 28px;
+    border-radius: 4px;
+    border: 1px solid;
+    padding: 0 0 0 8px;
+}
+
+#newPostForm p {
+    font-size: 12px;
+    padding: 4px 0 18px 0;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: 600;
+    padding: 0 0 8px 0;
+}
+
+.note {
+    font-size: 12px;
+    padding: 4px 0 18px 0;
+}
+
+.https {
+    color: red;
+}

@@ -25,7 +25,6 @@ logInBtn.onclick = function authorize(){
             return response.json()
         })
         .then(data => {
-            console.log(data)
             window.alert(`User ${data.data.name} successfully logged in!`);
             sessionStorage.setItem('Session key', data.data.accessToken);
             window.location.href = '../index.html';

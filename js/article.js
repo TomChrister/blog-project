@@ -13,22 +13,36 @@ fetch(apiArticleById)
         console.error('Error fetching article:', error);
     });
 
+
+// Display article
 function displayArticle(article) {
     const articleDisplay = document.getElementById('articleDisplay');
     const updatedDate = new Date(article.data.updated);
-    const formattedDate = `${updatedDate.getDate()}/${updatedDate.getMonth() + 1}/${updatedDate.getFullYear()} ${updatedDate.getHours()}:${updatedDate.getMinutes()}`;
+    const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
+    const formattedDate =  updatedDate.toLocaleDateString('en-GB', options);
     const authorName = article.data.author.name.replace(/_/g, ' ');
     const currentUrl = window.location.href;
 
     articleDisplay.innerHTML = `
-        <h2>${article.data.title}</h2>
-        <p>${article.data.body}</p>
-        <p>${formattedDate}</p>
-        <p>${authorName}</p>
-        ${article.data.media ? `<img src="${article.data.media.url}" alt="${article.data.media.alt}">` : ''}
-        ${loggedIn() ? `<button class="deleteBtn" data-id="${article.data.id}">Delete</button>` : ''}
-        <button onclick="copyClipboard('${currentUrl}')"><i class="fa-solid fa-link"></i></button>
-        ${loggedIn() ? `<button class="editBtn" data-id="${article.data.id}">Edit</button>` : ''}
+        <div class="content-wrapper">
+            <h2>${article.data.title}</h2>
+            <div class="img-container">
+                ${article.data.media ? `<img src="${article.data.media.url}" alt="${article.data.media.alt}">` : ''}
+            </div>
+        </div>
+        <div class="author-edit-delete flex-container">
+            <p>${authorName} • ${formattedDate}</p>
+            <div>
+                <button class="shareBtn" onclick="copyClipboard('${currentUrl}')">Share</button>
+                ${loggedIn() ? `<button class="editBtn" data-id="${article.data.id}">Edit</button>` : ''}
+                ${loggedIn() ? `<button class="deleteBtn" data-id="${article.data.id}">Delete</button>` : ''}
+             </div>
+        </div>  
+        <div class="tags-and-share flex-container">
+            <p>Category • ${article.data.tags}</p> •
+        </div>  
+        <hr class="hr-line">
+        <div class="article-text">${formatArticleBody(article.data.body)}</div>   
     `;
 
     const editButton = articleDisplay.querySelector('.editBtn');
@@ -37,23 +51,36 @@ function displayArticle(article) {
     });
 }
 
-function loggedIn() {
-    const accessToken = sessionStorage.getItem('Session key');
-    return accessToken !== null;
+function formatArticleBody(text) {
+    return text.split('\n').map(paragraph => `<p>${paragraph}</p>`).join('');
 }
 
+
+// Edit article function
 function editForm(article) {
     const articleDisplay = document.getElementById('articleDisplay');
-
     const editForm = document.createElement('form');
+    editForm.classList.add('edit-form')
     editForm.innerHTML = `
+        <h1>Edit article</h1>
         <input type="hidden" name="articleId" value="${article.data.id}">
         <label for="editTitle">Title:</label>
         <input type="text" id="editTitle" name="title" value="${article.data.title}" required>
         <label for="editBody">Body:</label>
         <textarea id="editBody" name="body" rows="4" required>${article.data.body}</textarea>
+        <label for="editTags">Tag:</label>
+        <select id="editTags" name="tag">
+            <option value disabled selected>Select a tag</option>
+            <option value="AI">AI</option>
+            <option value="Code">Code</option>
+            <option value="Cybersecurity">Cybersecurity</option>
+            <option value="Gadgets">Gadgets</option>
+            <option value="Software development">Software development</option>
+            <option value="Technology">Technology</option>
+        </select>
         <label for="editMediaUrl">Media URL:</label>
         <input type="text" id="editMediaUrl" name="mediaUrl" value="${article.data.media ? article.data.media.url : ''}">
+        <p>Note: When adding an image, please use links to a live and publicly accessible image with <span class="https">https://</span></p>
         <button type="submit">Save Changes</button>
     `;
 
@@ -63,6 +90,7 @@ function editForm(article) {
         const updatedArticleData = {
             title: formData.get('title'),
             body: formData.get('body'),
+            tags: formData.get('tag').split(',').map(tag => tag.trim()),
             media: {
                 url: formData.get('mediaUrl')
             }
@@ -70,11 +98,24 @@ function editForm(article) {
         const articleId = formData.get('articleId');
         putRequest(articleId, updatedArticleData);
     });
-
     articleDisplay.innerHTML = '';
     articleDisplay.appendChild(editForm);
 }
 
+
+// Share function
+function copyClipboard (url) {
+    const el = document.createElement('textarea');
+    el.value = url;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    alert('Link copied to clipboard!');
+}
+
+
+// PUT and DELETE requests
 function putRequest(articleId, updatedArticleData) {
     const putOptions = {
         method: 'PUT',
@@ -92,16 +133,6 @@ function putRequest(articleId, updatedArticleData) {
         .catch(error => {
             console.error('Error updating article:', error);
         });
-}
-
-function copyClipboard (url) {
-    const el = document.createElement('textarea');
-    el.value = url;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    alert('Link copied to clipboard!');
 }
 
 document.addEventListener('click', function(event) {
@@ -130,3 +161,31 @@ function deleteArticle() {
 }
 
 
+// Login and accessToken functions
+function loggedIn() {
+    const accessToken = sessionStorage.getItem('Session key');
+    return accessToken !== null;
+}
+
+function updateHeader() {
+    const loginAnchor = document.getElementById('loginAnchor');
+
+    if (loggedIn()) {
+        loginAnchor.textContent = 'Log out';
+        loginAnchor.href = 'index.html';
+    } else {
+        loginAnchor.textContent = 'Login';
+        loginAnchor.href = 'account/login.html'
+    }
+}
+updateHeader();
+
+function logout() {
+    sessionStorage.removeItem('Session key');
+    window.location.href = 'index.html';
+}
+
+const logoutBtn = document.getElementById('loginAnchor');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', logout);
+}
