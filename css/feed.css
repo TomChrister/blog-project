@@ -198,25 +198,23 @@ body {
 #sortSelect {
     height: 32px;
     width: 74px;
-    border: 1px solid #4D4730;
+    border: 1px solid #1d263beb;
     border-radius: 4px;
-    opacity: 0.5;
-    background-color: #4D4730;
+    background-color: #1d263beb;
     color: white;
 }
 
 #tagSelect {
     height: 32px;
     width: 74px;
-    border: 1px solid #4D4730;
+    border: 1px solid #1d263beb;
     border-radius: 4px;
-    opacity: 0.5;
-    background-color: #4D4730;
+    background-color: #1d263beb;
     color: white;
 }
 
 #sortSelect:hover, #tagSelect:hover {
-    opacity: 1;
+    background-color: #1d263bcf;
 }
 
 #tagSelect option {
@@ -238,11 +236,14 @@ body {
 
 .search-container {
     position: relative;
-    opacity: 0.5;
 }
 
 .search-container:hover {
-    opacity: 1;
+    opacity: 0.8;
+}
+
+.search-container i:hover {
+    opacity: 0.5;
 }
 
 .search-container i {
@@ -269,4 +270,5 @@ body {
     border-radius: 4px;
     border: 1px solid;
     background: bisque;
+    cursor: pointer;
 }
