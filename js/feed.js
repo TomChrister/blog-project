@@ -11,7 +11,6 @@ let articleWidth = 0;
 fetch(apiArticle)
     .then((response) => response.json())
     .then((data) => {
-        console.log('Data from API:', data);
         articlesData = data.data;
         append(articlesData);
     })
@@ -198,7 +197,6 @@ function loggedIn() {
 
 function updateHeader() {
     const loginAnchor = document.getElementById('loginAnchor');
-
     if (loggedIn()) {
         loginAnchor.textContent = 'Log out';
         loginAnchor.href = 'index.html';
@@ -227,5 +225,12 @@ if (newPostBtn) {
             alert('You need to be logged in to create a post. Click OK to go to login page.');
             window.location.href = 'account/login.html';
         }
+    });
+}
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
     });
 }
