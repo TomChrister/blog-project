@@ -6,19 +6,31 @@
     <title>Account login page</title>
     <link rel="stylesheet" href="/css/login.css" type="text/css">
     <script src="/js/login.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
+
 <body>
-<h1>Login</h1>
-
-<form id="login-form">
-    <label for="email">Mail</label>
-    <input type="email" id="email"><br>
-
-    <label for="password">Password</label>
-    <input type="password" id="password"><br>
-</form>
-
-<button id="login-button" type="button">Log in</button>
-
+<div class="container">
+    <div class="image-container">
+        <img src="../assets/images/logo4.jpg">
+    </div>
+    <div class="form-container">
+        <h1>Welcome</h1>
+        <p>Explore technology together</p>
+        <form id="login-form">
+            <label for="email">Email</label> <br>
+            <input type="email" id="email" placeholder="Email address"><br>
+            <label for="password">Password</label> <br>
+            <input type="password" id="password" placeholder="Password"><br>
+            <div class="login-btn-container">
+                <button id="login-button" type="button">Log in</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
+
+
 </html>

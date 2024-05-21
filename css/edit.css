@@ -22,6 +22,7 @@ body {
     border-radius: 4px;
     border: 1px solid;
     padding: 0 0 0 8px;
+    background-color: #00000010;
 }
 
 #newPostForm textarea {
@@ -30,6 +31,7 @@ body {
     height: 200px;
     margin: 4px 0 18px 0;
     padding: 4px 0 0 8px;
+    background-color: #00000010;
 }
 
 #newPostForm select {
@@ -40,6 +42,7 @@ body {
     border: 1px solid;
     padding: 0 0 0 8px;
     margin: 4px 0 18px 0;
+    background-color: #00000010;
 }
 
 #newPostForm label {
@@ -77,7 +80,7 @@ body {
 h1 {
     font-size: 28px;
     font-weight: 600;
-    padding: 0 0 8px 0;
+    padding: 0 0 16px 0;
 }
 
 .note {
@@ -87,4 +90,40 @@ h1 {
 
 .https {
     color: red;
+}
+
+.hr-div {
+    padding: 0 0 16px 0;
+}
+
+.hr-div hr {
+    opacity: 0.5;
+}
+
+.details {
+    padding: 0 0 16px 0;
+}
+
+.details h2 {
+    font-size: 22px;
+}
+
+#newPostForm #title::placeholder {
+    opacity: 0.8;
+    font-family: Arial, sans-serif;
+}
+
+#newPostForm #body::placeholder {
+    opacity: 0.8;
+    font-family: Arial, sans-serif;
+}
+
+#newPostForm #selected {
+    opacity: 0.8;
+    font-family: Arial, sans-serif;
+}
+
+#newPostForm #image_url::placeholder {
+    opacity: 0.8;
+    font-family: Arial, sans-serif;
 }

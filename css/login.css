@@ -1,0 +1,62 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Montserrat, sans-serif;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+}
+
+.image-container {
+    flex: 1;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    margin: 0;
+    font-weight: 500;
+}
+
+#login-form {
+    max-width: 400px;
+}
+
+#login-button {
+    width: 100%;
+}
+
+.login-btn-container {
+    text-align: center;
+}
+
+#email, #password {
+    width: 248px;
+}
+
+#email {
+    margin: 4px 0 16px 0;
+}
+
+#password {
+    margin: 4px 0 28px 0;
+}
+
+.form-container p {
+    opacity: 0.8;
+}
