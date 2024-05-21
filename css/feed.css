@@ -186,6 +186,7 @@ body {
     border: 1px solid;
     border-radius: 4px;
     padding: 0 0 0 8px;
+    color: #033860;
 }
 
 .search-btn {
@@ -195,36 +196,27 @@ body {
     border-radius: 4px;
 }
 
-#sortSelect {
+#sortSelect, #tagSelect {
     height: 32px;
     width: 74px;
-    border: 1px solid #1d263beb;
+    border: 1px solid #033860;
     border-radius: 4px;
-    background-color: #1d263beb;
-    color: white;
-}
-
-#tagSelect {
-    height: 32px;
-    width: 74px;
-    border: 1px solid #1d263beb;
-    border-radius: 4px;
-    background-color: #1d263beb;
-    color: white;
+    background-color: white;
+    color: #033860;
 }
 
 #sortSelect:hover, #tagSelect:hover {
-    background-color: #1d263bcf;
+    border: 2px solid #033860;
 }
 
 #tagSelect option {
     background-color: white;
-    color: black;
+    color: #033860;
 }
 
 #sortSelect option {
     background-color: white;
-    color: black;
+    color: #033860;
 }
 
 .input-container {
