@@ -6,7 +6,6 @@ const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVG9tX0Nocm
 fetch(apiArticleById)
     .then((response) => response.json())
     .then((data) => {
-        console.log('Article Data:', data);
         displayArticle(data);
     })
     .catch((error) => {

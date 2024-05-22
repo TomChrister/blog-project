@@ -53,3 +53,8 @@ li {
         display: none;
     }
 }
+
+.logo img {
+    width: 116px;
+    height: auto;
+}

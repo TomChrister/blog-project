@@ -66,7 +66,7 @@ function articleGrid(data) {
         div.classList.add("articles");
         div.innerHTML = `
             <div class="content-wrapper">
-                <a href="article.html?id=${post.id}">${post.media ? `<img class="grid-img" src="${post.media.url}" alt="${post.media.alt}">` : ''}</a>
+                <a href="article.html?id=${post.id}" aria-label="Read more about the article">${post.media ? `<img class="grid-img" src="${post.media.url}" alt="${post.media.alt}">` : ''}</a>
                 <h2>${post.title}</h2>
                 <p class="body-p">${introduction}</p>
                 <p>${authorName} • ${formattedDate}</p>

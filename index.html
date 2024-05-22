@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="TechFuse, get updated on the latest technology here.">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Title</title>
-    <link href="css/feed.css" rel="stylesheet" type="text/css">
+    <title>Techpulse</title>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
     <script src="https://kit.fontawesome.com/fe924a0d6e.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,17 +15,15 @@
 <body>
 
 <header>
-    <div>
-        <ul>
-            <li><a href="index.html">
-                <img src="assets/images/logo1.png" alt="logo" style="width: 130px">
-            </a></li>
-        </ul>
+    <div class="logo">
+        <a href="index.html">
+            <img src="assets/images/logo.png" alt="logo">
+        </a>
     </div>
     <div>
         <ul>
             <li class="articles-header">Articles</li>
-            <li><a id="newPost" href="post/edit.html">Create post</a></li>
+            <li><a id="newPost" href="post/create.html">Create post</a></li>
             <li class="features">Features</li>
             <li class="about">About</li>
         </ul>
@@ -36,23 +35,23 @@
 <div id="carouselContainer">
     <div id="carousel" class="carousel">
     </div>
-    <button id="leftBtn" class="carouselBtn"><i class="fa-solid fa-chevron-left"></i></i></button>
-    <button id="rightBtn" class="carouselBtn"><i class="fa-solid fa-chevron-right"></i></button>
+    <button id="leftBtn" class="carouselBtn" aria-label="left-button"><i class="fa-solid fa-chevron-left"></i></button>
+    <button id="rightBtn" class="carouselBtn" aria-label="right-button"><i class="fa-solid fa-chevron-right"></i></button>
 </div>
 
 <div class="input-container">
     <div class="search-container">
-        <input class="search-field" type="text" id="searchInput" placeholder="Search articles...">
+        <input class="search-field" type="text" id="searchInput" placeholder="Search articles..." aria-label="Search bar">
         <i class="fa-solid fa-magnifying-glass"></i>
     </div>
     <div>
-        <select id="sortSelect">
+        <select id="sortSelect" aria-label="Sort by">
             <option value disabled selected>Sort by</option>
             <option value="newest">Newest</option>
             <option value="oldest">Oldest</option>
         </select>
 
-        <select id="tagSelect">
+        <select id="tagSelect" aria-label="Tags">
             <option value disabled selected>Tags</option>
             <option value="all">All</option>
             <option value="AI">AI</option>
@@ -74,7 +73,7 @@
 
 <footer>
     <div class="logo">
-        <img src="assets/images/logo1.png" alt="logo" style="width: 88px">
+        <img src="assets/images/logo.png" alt="logo">
     </div>
     <div>
         <ul class="footer-list">
@@ -122,7 +121,7 @@
     </div>
 </footer>
 
-<script src="/js/feed.js" defer></script>
+<script src="/js/main.js" defer></script>
 
 </body>
 </html>
