@@ -87,3 +87,9 @@ h1 {
     font-size: 14px;
     font-weight: 500;
 }
+
+@media (max-width: 620px) {
+    .image-container {
+        display: none;
+    }
+}

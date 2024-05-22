@@ -56,11 +56,11 @@ body {
     border: none;
     cursor: pointer;
     color: white;
-    background-color: #008000c2;
+    background-color: #008000;
 }
 
 #newPostForm button:hover {
-    background-color: #008000;
+    background-color: #008000c2;
 }
 
 #newPostForm #image_url {

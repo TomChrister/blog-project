@@ -26,7 +26,7 @@ footer .footer-list {
 }
 
 .footer-list li:hover {
-    color: #345f5d;
+    opacity: 0.5;
 }
 
 .newsletter {
@@ -56,7 +56,7 @@ input[type="email"] {
 
 .submitBtn:hover {
     opacity: 1;
-    color: #345f5d;
+    color: #033860;
 }
 
 .footer-icons {
@@ -66,12 +66,12 @@ input[type="email"] {
 
 .footer-icons i {
     font-size: 32px;
-    color: #498C8A;
+    color: rgba(75, 73, 73, 0.43);
     cursor: pointer;
 }
 
 .footer-icons i:hover {
-    color: #345f5d;
+    color: #4B4949FF;
 }
 
 .hr {
@@ -94,7 +94,7 @@ input[type="email"] {
 
 .terms-conditions p:hover {
     opacity: 1;
-    color: #345f5d;
+    color: #033860;
 }
 
 .info {

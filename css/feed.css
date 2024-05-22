@@ -206,7 +206,7 @@ body {
 }
 
 #sortSelect:hover, #tagSelect:hover {
-    border: 2px solid #033860;
+    opacity: 0.8;
 }
 
 #tagSelect option {
@@ -260,7 +260,12 @@ body {
     width: 100px;
     height: 30px;
     border-radius: 4px;
-    border: 1px solid;
-    background: bisque;
+    border: none;
+    background: #033860;
     cursor: pointer;
+    color: white;
+}
+
+.back-to-top:hover {
+    opacity: 0.8;
 }

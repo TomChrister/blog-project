@@ -44,6 +44,12 @@ li {
 }
 
 #loginAnchor:hover {
-    background-color: #345f5d;
+    opacity: 0.8;
     transition: 2ms ease-in-out;
+}
+
+@media (max-width: 740px) {
+    .articles-header, .features, .about {
+        display: none;
+    }
 }
