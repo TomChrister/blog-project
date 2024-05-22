@@ -30,7 +30,7 @@ function displayArticle(article) {
             </div>
         </div>
         <div class="author-edit-delete flex-container">
-            <p>${authorName} • ${formattedDate}</p>
+            <p>${authorName} • Updated ${formattedDate}</p>
             <div>
                 <button class="shareBtn" onclick="copyClipboard('${currentUrl}')">Share</button>
                 ${loggedIn() ? `<button class="editBtn" data-id="${article.data.id}">Edit</button>` : ''}

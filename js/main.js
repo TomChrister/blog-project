@@ -58,9 +58,8 @@ function articleGrid(data) {
         const formattedDate = updatedDate.toLocaleDateString('en-GB', options);
         const authorName = post.author.name.replace(/_/g, ' ');
 
-        const maxWords = 4;
-        const words = post.body.split(" ");
-        const introduction = words.length > maxWords ? words.slice(0, maxWords).join(" ") : post.body;
+        const maxChars = 38;
+        const introduction = post.body.length > maxChars ? post.body.substring(0, maxChars) + "...":post.body;
 
         const div = document.createElement("div");
         div.classList.add("articles");
@@ -164,7 +163,7 @@ rightBtn.addEventListener("click", scrollRight);
 function scrollLeft() {
     scrollPosition -= articleWidth;
     if (scrollPosition < 0) {
-        scrollPosition = 0;
+        scrollPosition = carouselContainer.scrollWidth - articleWidth;
     }
     carouselContainer.scrollTo({
         left: scrollPosition,
@@ -186,6 +185,13 @@ function scrollRight() {
 function updateArticleWidth() {
     const articleElement = document.querySelector('.articles-carousel');
     articleWidth = articleElement ? articleElement.offsetWidth : 0;
+}
+
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 }
 
 
@@ -225,12 +231,5 @@ if (newPostBtn) {
             alert('You need to be logged in to create a post. Click OK to go to login page.');
             window.location.href = 'account/login.html';
         }
-    });
-}
-
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
     });
 }

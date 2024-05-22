@@ -1,11 +1,12 @@
-const api = "https://v2.api.noroff.dev/auth/login"
+const api = "https://v2.api.noroff.dev/auth/login";
 const mail = document.getElementById('email');
 const password = document.getElementById('password');
 const logInBtn = document.getElementById('login-button');
+const errorMessage = document.getElementById('error-message');
 
-logInBtn.onclick = function authorize(){
-    const mailValue = mail.value
-    const pwdValue = password.value
+logInBtn.onclick = function authorize() {
+    const mailValue = mail.value;
+    const pwdValue = password.value;
     const postData = {
         email: mailValue,
         password: pwdValue
@@ -20,9 +21,9 @@ logInBtn.onclick = function authorize(){
     })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Response not ok');
+                throw new Error('Incorrect email or password'); // Update error message
             }
-            return response.json()
+            return response.json();
         })
         .then(data => {
             window.alert(`User ${data.data.name} successfully logged in!`);
@@ -30,6 +31,9 @@ logInBtn.onclick = function authorize(){
             window.location.href = '../index.html';
         })
         .catch(error => {
-            console.error('Error', error)
+            console.error('Error', error);
+            errorMessage.textContent = 'Incorrect email or password'; // Display error message
+            errorMessage.style.display = 'block'; // Make the error message visible
         });
 }
+

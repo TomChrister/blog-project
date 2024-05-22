@@ -19,6 +19,15 @@ header ul li a {
     color: inherit;
 }
 
+header ul li {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+header ul li:hover {
+    opacity: 0.5;
+}
+
 ul {
     display: flex;
     justify-content: space-evenly;
@@ -55,6 +64,6 @@ li {
 }
 
 .logo img {
-    width: 116px;
+    width: 128px;
     height: auto;
 }

@@ -64,6 +64,8 @@ body {
     transform: translate(-50%, -50%);
     color: white;
     font-size: 18px;
+    filter: drop-shadow(2px 4px 6px black);
+
 }
 
 @media screen and (min-width: 430px) and (max-width: 800px){
@@ -173,10 +175,11 @@ body {
 
 .articles h2 {
     font-size: 18px;
+    padding: 6px 0 0 0;
 }
 
 .body-p {
-    padding: 4px 0 12px 0;
+    padding: 6px 0 16px 0;
 }
 
 .search-field {
@@ -253,7 +256,7 @@ body {
 .top-btn {
     display: flex;
     justify-content: center;
-    padding: 26px 0 50px 0;
+    padding: 8px 0 50px 0;
 }
 
 .back-to-top {
