@@ -171,7 +171,6 @@ function deleteArticle() {
 }
 
 
-
 // Login and accessToken functions
 function loggedIn() {
     const accessToken = sessionStorage.getItem('Session key');

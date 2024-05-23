@@ -107,22 +107,8 @@ h1 {
     font-size: 22px;
 }
 
-#newPostForm #title::placeholder {
-    opacity: 0.8;
-    font-family: Arial, sans-serif;
-}
-
-#newPostForm #body::placeholder {
-    opacity: 0.8;
-    font-family: Arial, sans-serif;
-}
-
-#newPostForm #selected {
-    opacity: 0.8;
-    font-family: Arial, sans-serif;
-}
-
-#newPostForm #image_url::placeholder {
+#newPostForm #title::placeholder, #newPostForm #body::placeholder,
+#newPostForm #selected::placeholder, #newPostForm #image_url::placeholder {
     opacity: 0.8;
     font-family: Arial, sans-serif;
 }

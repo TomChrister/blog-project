@@ -182,6 +182,7 @@ function scrollRight() {
     });
 }
 
+
 function updateArticleWidth() {
     const articleElement = document.querySelector('.articles-carousel');
     articleWidth = articleElement ? articleElement.offsetWidth : 0;

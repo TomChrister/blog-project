@@ -9,10 +9,6 @@ body {
     font-family: Montserrat, sans-serif;
 }
 
-img {
-    width: 150px;
-}
-
 #articleDisplay {
     display: flex;
     flex-direction: column;
@@ -49,15 +45,7 @@ img {
     padding: 0 8px 0 8px;
 }
 
-.deleteBtn:hover {
-    opacity: 1;
-}
-
-.editBtn:hover {
-    opacity: 1;
-}
-
-.shareBtn:hover {
+.deleteBtn:hover, .editBtn:hover, .shareBtn:hover {
     opacity: 1;
 }
 

@@ -54,7 +54,6 @@ li {
 
 #loginAnchor:hover {
     opacity: 0.8;
-    transition: 2ms ease-in-out;
 }
 
 @media (max-width: 740px) {

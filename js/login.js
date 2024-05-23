@@ -21,7 +21,7 @@ logInBtn.onclick = function authorize() {
     })
         .then(response => {
             if (!response.ok) {
-                throw new Error('Incorrect email or password'); // Update error message
+                throw new Error('Incorrect email or password');
             }
             return response.json();
         })
@@ -32,8 +32,8 @@ logInBtn.onclick = function authorize() {
         })
         .catch(error => {
             console.error('Error', error);
-            errorMessage.textContent = 'Incorrect email or password'; // Display error message
-            errorMessage.style.display = 'block'; // Make the error message visible
+            errorMessage.textContent = 'Incorrect email or password';
+            errorMessage.style.display = 'block';
         });
 }
 

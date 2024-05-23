@@ -165,11 +165,7 @@ body {
     right: 16px;
 }
 
-#leftBtn i:hover {
-    opacity: 0.5;
-}
-
-#rightBtn i:hover {
+#leftBtn i:hover, #rightBtn i:hover {
     opacity: 0.5;
 }
 
@@ -212,12 +208,7 @@ body {
     opacity: 0.8;
 }
 
-#tagSelect option {
-    background-color: white;
-    color: #033860;
-}
-
-#sortSelect option {
+#tagSelect option, #sortSelect option {
     background-color: white;
     color: #033860;
 }
