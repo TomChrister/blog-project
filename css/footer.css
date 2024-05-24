@@ -120,6 +120,12 @@ input[type="email"] {
     }
 }
 
+@media (max-width: 480px) {
+    .terms-conditions {
+        flex-direction: column;
+    }
+}
+
 .logo img {
     width: 128px;
     height: auto;
