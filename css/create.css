@@ -11,7 +11,6 @@ body {
 #newPostForm {
     display: flex;
     flex-direction: column;
-    font-family: Roboto, sans-serif;
 }
 
 #newPostForm input {
@@ -22,6 +21,7 @@ body {
     border-radius: 4px;
     border: 1px solid;
     padding: 0 0 0 8px;
+    background-color: #00000010;
 }
 
 #newPostForm textarea {
@@ -29,7 +29,8 @@ body {
     min-width: 350px;
     height: 200px;
     margin: 4px 0 18px 0;
-    padding: 4px 0 0 8px;
+    padding: 6px 0 0 8px;
+    background-color: #00000010;
 }
 
 #newPostForm select {
@@ -40,6 +41,7 @@ body {
     border: 1px solid;
     padding: 0 0 0 8px;
     margin: 4px 0 18px 0;
+    background-color: #00000010;
 }
 
 #newPostForm label {
@@ -53,11 +55,11 @@ body {
     border: none;
     cursor: pointer;
     color: white;
-    background-color: #008000c2;
+    background-color: #008000;
 }
 
 #newPostForm button:hover {
-    background-color: #008000;
+    background-color: #008000c2;
 }
 
 #newPostForm #image_url {
@@ -77,7 +79,7 @@ body {
 h1 {
     font-size: 28px;
     font-weight: 600;
-    padding: 0 0 8px 0;
+    padding: 0 0 16px 0;
 }
 
 .note {
@@ -87,4 +89,26 @@ h1 {
 
 .https {
     color: red;
+}
+
+.hr-div {
+    padding: 0 0 16px 0;
+}
+
+.hr-div hr {
+    opacity: 0.5;
+}
+
+.details {
+    padding: 0 0 16px 0;
+}
+
+.details h2 {
+    font-size: 22px;
+}
+
+#newPostForm #title::placeholder, #newPostForm #body::placeholder,
+#newPostForm #selected::placeholder, #newPostForm #image_url::placeholder {
+    opacity: 0.8;
+    font-family: Arial, sans-serif;
 }

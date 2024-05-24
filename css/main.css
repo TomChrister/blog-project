@@ -59,11 +59,13 @@ body {
 
 .content-container .author {
     position: absolute;
-    top: 45%;
+    top: 48%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
     font-size: 18px;
+    filter: drop-shadow(2px 4px 6px black);
+
 }
 
 @media screen and (min-width: 430px) and (max-width: 800px){
@@ -163,20 +165,17 @@ body {
     right: 16px;
 }
 
-#leftBtn i:hover {
-    opacity: 0.5;
-}
-
-#rightBtn i:hover {
+#leftBtn i:hover, #rightBtn i:hover {
     opacity: 0.5;
 }
 
 .articles h2 {
     font-size: 18px;
+    padding: 6px 0 0 0;
 }
 
 .body-p {
-    padding: 4px 0 12px 0;
+    padding: 6px 0 16px 0;
 }
 
 .search-field {
@@ -186,6 +185,7 @@ body {
     border: 1px solid;
     border-radius: 4px;
     padding: 0 0 0 8px;
+    color: #033860;
 }
 
 .search-btn {
@@ -195,38 +195,22 @@ body {
     border-radius: 4px;
 }
 
-#sortSelect {
+#sortSelect, #tagSelect {
     height: 32px;
     width: 74px;
-    border: 1px solid #4D4730;
+    border: 1px solid #033860;
     border-radius: 4px;
-    opacity: 0.5;
-    background-color: #4D4730;
-    color: white;
-}
-
-#tagSelect {
-    height: 32px;
-    width: 74px;
-    border: 1px solid #4D4730;
-    border-radius: 4px;
-    opacity: 0.5;
-    background-color: #4D4730;
-    color: white;
+    background-color: white;
+    color: #033860;
 }
 
 #sortSelect:hover, #tagSelect:hover {
-    opacity: 1;
+    opacity: 0.8;
 }
 
-#tagSelect option {
+#tagSelect option, #sortSelect option {
     background-color: white;
-    color: black;
-}
-
-#sortSelect option {
-    background-color: white;
-    color: black;
+    color: #033860;
 }
 
 .input-container {
@@ -238,11 +222,14 @@ body {
 
 .search-container {
     position: relative;
-    opacity: 0.5;
 }
 
 .search-container:hover {
-    opacity: 1;
+    opacity: 0.8;
+}
+
+.search-container i:hover {
+    opacity: 0.5;
 }
 
 .search-container i {
@@ -260,13 +247,19 @@ body {
 .top-btn {
     display: flex;
     justify-content: center;
-    padding: 26px 0 50px 0;
+    padding: 8px 0 50px 0;
 }
 
 .back-to-top {
     width: 100px;
     height: 30px;
     border-radius: 4px;
-    border: 1px solid;
-    background: bisque;
+    border: none;
+    background: #033860;
+    cursor: pointer;
+    color: white;
+}
+
+.back-to-top:hover {
+    opacity: 0.8;
 }

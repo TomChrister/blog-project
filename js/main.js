@@ -57,16 +57,14 @@ function articleGrid(data) {
         const options = { day: 'numeric', month: 'long', year: 'numeric'};
         const formattedDate = updatedDate.toLocaleDateString('en-GB', options);
         const authorName = post.author.name.replace(/_/g, ' ');
-
-        const maxWords = 4;
-        const words = post.body.split(" ");
-        const introduction = words.length > maxWords ? words.slice(0, maxWords).join(" ") : post.body;
+        const maxChars = 38;
+        const introduction = post.body.length > maxChars ? post.body.substring(0, maxChars) + "...":post.body;
 
         const div = document.createElement("div");
         div.classList.add("articles");
         div.innerHTML = `
             <div class="content-wrapper">
-                <a href="article.html?id=${post.id}">${post.media ? `<img class="grid-img" src="${post.media.url}" alt="${post.media.alt}">` : ''}</a>
+                <a href="article.html?id=${post.id}" aria-label="Read more about the article">${post.media ? `<img class="grid-img" src="${post.media.url}" alt="${post.media.alt}">` : ''}</a>
                 <h2>${post.title}</h2>
                 <p class="body-p">${introduction}</p>
                 <p>${authorName} • ${formattedDate}</p>
@@ -94,7 +92,6 @@ function append(data) {
 // Sort, filtering and search functions
 function sortByNewest() {
     let sortedData = [...articlesData].sort((a, b) => new Date(b.created) - new Date(a.created));
-
     if (currentTag !== 'all') {
         sortedData = sortedData.filter(article => article.tags && article.tags.includes(currentTag));
     }
@@ -103,7 +100,6 @@ function sortByNewest() {
 
 function sortByOldest() {
     let sortedData = [...articlesData].sort((a, b) => new Date(a.created) - new Date(b.created));
-
     if (currentTag !== 'all') {
         sortedData = sortedData.filter(article => article.tags && article.tags.includes(currentTag));
     }
@@ -164,7 +160,7 @@ rightBtn.addEventListener("click", scrollRight);
 function scrollLeft() {
     scrollPosition -= articleWidth;
     if (scrollPosition < 0) {
-        scrollPosition = 0;
+        scrollPosition = carouselContainer.scrollWidth - articleWidth;
     }
     carouselContainer.scrollTo({
         left: scrollPosition,
@@ -188,6 +184,13 @@ function updateArticleWidth() {
     articleWidth = articleElement ? articleElement.offsetWidth : 0;
 }
 
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
 
 // Login and accessToken functions
 function loggedIn() {
@@ -207,14 +210,14 @@ function updateHeader() {
 }
 updateHeader();
 
-function logout() {
+function logOut() {
     sessionStorage.removeItem('Session key');
     window.location.href = 'index.html';
 }
 
 const logoutBtn = document.getElementById('loginAnchor');
 if (logoutBtn) {
-    logoutBtn.addEventListener('click', logout);
+    logoutBtn.addEventListener('click', logOut);
 }
 
 const newPostBtn = document.getElementById('newPost');
@@ -225,12 +228,5 @@ if (newPostBtn) {
             alert('You need to be logged in to create a post. Click OK to go to login page.');
             window.location.href = 'account/login.html';
         }
-    });
-}
-
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
     });
 }

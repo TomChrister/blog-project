@@ -26,7 +26,7 @@ footer .footer-list {
 }
 
 .footer-list li:hover {
-    color: #345f5d;
+    opacity: 0.5;
 }
 
 .newsletter {
@@ -54,9 +54,9 @@ input[type="email"] {
     cursor: pointer;
 }
 
-.submitBtn:hover {
+.submitBtn:hover, .footer-icons i:hover {
     opacity: 1;
-    color: #345f5d;
+    color: rgba(75, 73, 73, 0.75);
 }
 
 .footer-icons {
@@ -66,12 +66,8 @@ input[type="email"] {
 
 .footer-icons i {
     font-size: 32px;
-    color: #498C8A;
+    color: rgb(75 73 73);
     cursor: pointer;
-}
-
-.footer-icons i:hover {
-    color: #345f5d;
 }
 
 .hr {
@@ -88,13 +84,8 @@ input[type="email"] {
     cursor: pointer;
 }
 
-.terms-conditions, .info {
-    opacity: 0.5;
-}
-
 .terms-conditions p:hover {
-    opacity: 1;
-    color: #345f5d;
+    color: rgba(75, 73, 73, 0.75);
 }
 
 .info {
@@ -127,4 +118,9 @@ input[type="email"] {
         flex-direction: column;
         gap: 8px;
     }
+}
+
+.logo img {
+    width: 128px;
+    height: auto;
 }

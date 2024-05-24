@@ -19,6 +19,15 @@ header ul li a {
     color: inherit;
 }
 
+header ul li {
+    cursor: pointer;
+    font-weight: 500;
+}
+
+header ul li:hover {
+    opacity: 0.5;
+}
+
 ul {
     display: flex;
     justify-content: space-evenly;
@@ -30,20 +39,36 @@ li {
     list-style-type: none;
 }
 
+.login-container {
+    width: 128px;
+    display: flex;
+    justify-content: center;
+}
+
 #loginAnchor {
     text-decoration: none;
     color: white;
-    width: 72px;
+    width: 88px;
     height: 30px;
     border-radius: 8px;
     border: none;
-    background: #498C8A;
+    background: #033860;
     font-size: 14px;
     text-align: center;
     align-content: center;
 }
 
 #loginAnchor:hover {
-    background-color: #345f5d;
-    transition: 2ms ease-in-out;
+    opacity: 0.8;
+}
+
+@media (max-width: 740px) {
+    .articles-header, .features, .about {
+        display: none;
+    }
+}
+
+.logo img {
+    width: 128px;
+    height: auto;
 }

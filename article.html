@@ -3,40 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Article</title>
+    <title>Article page</title>
     <link href="css/article.css" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/fe924a0d6e.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/fe924a0d6e.js" crossorigin="anonymous"></script>
+    <script src="js/article.js" defer></script>
 </head>
+
 <body>
 
 <header>
-    <div>
-        <ul>
-            <li><a href="index.html">
-                Logo
-            </a></li>
-        </ul>
+    <div class="logo">
+        <a href="index.html">
+            <img src="assets/images/logo.png" alt="logo">
+        </a>
     </div>
     <div>
         <ul>
-            <li>Articles</li>
-            <li><a id="newPost" href="post/edit.html">Create post</a></li>
-            <li>Pricing</li>
-            <li>About</li>
+            <li class="articles-header">Articles</li>
+            <li><a id="newPost" href="post/create.html">Create post</a></li>
+            <li class="features">Features</li>
+            <li class="about">About</li>
         </ul>
     </div>
-    <a id="loginAnchor" href="account/login.html">
-    </a>
+    <div class="login-container">
+        <a id="loginAnchor" href="account/login.html"></a>
+    </div>
 </header>
-
 
 <div id="articleDisplay">
 </div>
 
 <footer>
     <div class="logo">
-        Logo
+        <img src="assets/images/logo.png" alt="logo">
     </div>
     <div>
         <ul class="footer-list">
@@ -46,15 +46,13 @@
             <li>Contact</li>
         </ul>
     </div>
-    <div>
-        <div class="footer-icons">
-            <i class="fa-brands fa-square-facebook"></i>
-            <i class="fa-brands fa-square-instagram"></i>
-            <i class="fa-brands fa-square-x-twitter"></i>
-        </div>
+    <div class="footer-icons">
+        <i class="fa-brands fa-square-facebook"></i>
+        <i class="fa-brands fa-square-instagram"></i>
+        <i class="fa-brands fa-square-x-twitter"></i>
     </div>
-    <div class="form-container">
-        <div>
+    <div>
+        <div class="form-container">
             <p class="newsletter">Sign up for our newsletter and get the latest news</p>
             <form class="newsletter-form">
                 <label for="email"></label>
@@ -70,7 +68,7 @@
 
 <footer>
     <div>
-        <p class="site-name">© Tech blog</p>
+        <p class="site-name">© TECHPULSE</p>
     </div>
     <div class="terms-conditions">
         <p>Privacy policy</p>
@@ -85,8 +83,6 @@
         <p>Techblog@mail.com</p>
     </div>
 </footer>
-
-<script src="js/article.js" defer></script>
 
 </body>
 </html>

@@ -6,7 +6,6 @@ const bearerToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVG9tX0Nocm
 fetch(apiArticleById)
     .then((response) => response.json())
     .then((data) => {
-        console.log('Article Data:', data);
         displayArticle(data);
     })
     .catch((error) => {
@@ -21,7 +20,6 @@ function displayArticle(article) {
     const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
     const formattedDate =  updatedDate.toLocaleDateString('en-GB', options);
     const authorName = article.data.author.name.replace(/_/g, ' ');
-    const currentUrl = window.location.href;
 
     articleDisplay.innerHTML = `
         <div class="content-wrapper">
@@ -31,9 +29,9 @@ function displayArticle(article) {
             </div>
         </div>
         <div class="author-edit-delete flex-container">
-            <p>${authorName} • ${formattedDate}</p>
+            <p>${authorName} • Updated ${formattedDate}</p>
             <div>
-                <button class="shareBtn" onclick="copyClipboard('${currentUrl}')">Share</button>
+                <button class="shareBtn" onclick="copyClipboard(this, window.location.href)">Share</button>
                 ${loggedIn() ? `<button class="editBtn" data-id="${article.data.id}">Edit</button>` : ''}
                 ${loggedIn() ? `<button class="deleteBtn" data-id="${article.data.id}">Delete</button>` : ''}
              </div>
@@ -60,7 +58,7 @@ function formatArticleBody(text) {
 function editForm(article) {
     const articleDisplay = document.getElementById('articleDisplay');
     const editForm = document.createElement('form');
-    editForm.classList.add('edit-form')
+    editForm.classList.add('edit-form');
     editForm.innerHTML = `
         <h1>Edit article</h1>
         <input type="hidden" name="articleId" value="${article.data.id}">
@@ -70,7 +68,7 @@ function editForm(article) {
         <textarea id="editBody" name="body" rows="4" required>${article.data.body}</textarea>
         <label for="editTags">Tag:</label>
         <select id="editTags" name="tag">
-            <option value disabled selected>Select a tag</option>
+            <option value="" disabled selected>Select a tag</option>
             <option value="AI">AI</option>
             <option value="Code">Code</option>
             <option value="Cybersecurity">Cybersecurity</option>
@@ -78,6 +76,7 @@ function editForm(article) {
             <option value="Software development">Software development</option>
             <option value="Technology">Technology</option>
         </select>
+        <p id="tagError"></p>
         <label for="editMediaUrl">Media URL:</label>
         <input type="text" id="editMediaUrl" name="mediaUrl" value="${article.data.media ? article.data.media.url : ''}">
         <p>Note: When adding an image, please use links to a live and publicly accessible image with <span class="https">https://</span></p>
@@ -87,10 +86,18 @@ function editForm(article) {
     editForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const formData = new FormData(editForm);
+        const selectedTag = formData.get('tag');
+
+        if (!selectedTag) {
+            const tagError = document.getElementById('tagError');
+            tagError.textContent = 'You need to select a tag before saving';
+            return;
+        }
+
         const updatedArticleData = {
             title: formData.get('title'),
             body: formData.get('body'),
-            tags: formData.get('tag').split(',').map(tag => tag.trim()),
+            tags: selectedTag.split(',').map(tag => tag.trim()),
             media: {
                 url: formData.get('mediaUrl')
             }
@@ -104,14 +111,17 @@ function editForm(article) {
 
 
 // Share function
-function copyClipboard (url) {
+function copyClipboard(button, url) {
     const el = document.createElement('textarea');
     el.value = url;
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
-    alert('Link copied to clipboard!');
+    button.textContent = 'Link copied!';
+    setTimeout(() => {
+        button.textContent = 'Share';
+    }, 3000);
 }
 
 
@@ -142,22 +152,24 @@ document.addEventListener('click', function(event) {
 });
 
 function deleteArticle() {
-    fetch(apiArticleById, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${bearerToken}`
-        },
-    })
-        .then(response => {
-            if (response.ok) {
-                window.location.href = 'index.html';
-            } else {
-                console.error('Failed to delete article');
-            }
+    if (window.confirm('Are you sure you want to delete this article?')) {
+        fetch(apiArticleById, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${bearerToken}`
+            },
         })
-        .catch(error => {
-            console.error('Error deleting article:', error);
-        });
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = 'index.html';
+                } else {
+                    console.error('Failed to delete article');
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting article:', error);
+            });
+    }
 }
 
 
