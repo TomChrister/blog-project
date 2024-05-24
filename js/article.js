@@ -20,7 +20,6 @@ function displayArticle(article) {
     const options = { day: 'numeric', month: 'long', year: 'numeric', hour: 'numeric', minute: 'numeric'};
     const formattedDate =  updatedDate.toLocaleDateString('en-GB', options);
     const authorName = article.data.author.name.replace(/_/g, ' ');
-    const currentUrl = window.location.href;
 
     articleDisplay.innerHTML = `
         <div class="content-wrapper">
@@ -32,7 +31,7 @@ function displayArticle(article) {
         <div class="author-edit-delete flex-container">
             <p>${authorName} • Updated ${formattedDate}</p>
             <div>
-                <button class="shareBtn" onclick="copyClipboard('${currentUrl}')">Share</button>
+                <button class="shareBtn" onclick="copyClipboard(this, window.location.href)">Share</button>
                 ${loggedIn() ? `<button class="editBtn" data-id="${article.data.id}">Edit</button>` : ''}
                 ${loggedIn() ? `<button class="deleteBtn" data-id="${article.data.id}">Delete</button>` : ''}
              </div>
@@ -112,14 +111,17 @@ function editForm(article) {
 
 
 // Share function
-function copyClipboard (url) {
+function copyClipboard(button, url) {
     const el = document.createElement('textarea');
     el.value = url;
     document.body.appendChild(el);
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
-    alert('Link copied to clipboard!');
+    button.textContent = 'Link copied!';
+    setTimeout(() => {
+        button.textContent = 'Share';
+    }, 3000);
 }
 
 

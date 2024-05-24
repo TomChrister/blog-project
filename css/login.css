@@ -4,7 +4,7 @@
 
 body, html {
     margin: 0;
-    padding: 0;
+    padding: 0 40px;
     height: 100%;
     font-family: Montserrat, sans-serif;
 }
@@ -16,12 +16,14 @@ body, html {
 
 .image-container {
     flex: 1;
+    display: flex;
+    justify-content: center;
 }
 
 .image-container img {
-    width: 100%;
+    width: 80%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .form-container {
@@ -49,6 +51,10 @@ h1 {
     background-color: #23313C;
     color: white;
     cursor: pointer;
+}
+
+#login-button:hover {
+    opacity: 0.9;
 }
 
 .login-btn-container {
@@ -98,8 +104,23 @@ h1 {
     font-size: 14px;
 }
 
+.logo-form {
+    display: none;
+}
+
 @media (max-width: 900px) {
     .image-container {
         display: none;
+    }
+
+    .logo-form {
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo-form img {
+        width: 70%;
+        height: auto;
+        padding: 0 0 26px 0;
     }
 }

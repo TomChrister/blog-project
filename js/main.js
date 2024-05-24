@@ -57,7 +57,6 @@ function articleGrid(data) {
         const options = { day: 'numeric', month: 'long', year: 'numeric'};
         const formattedDate = updatedDate.toLocaleDateString('en-GB', options);
         const authorName = post.author.name.replace(/_/g, ' ');
-
         const maxChars = 38;
         const introduction = post.body.length > maxChars ? post.body.substring(0, maxChars) + "...":post.body;
 
@@ -93,7 +92,6 @@ function append(data) {
 // Sort, filtering and search functions
 function sortByNewest() {
     let sortedData = [...articlesData].sort((a, b) => new Date(b.created) - new Date(a.created));
-
     if (currentTag !== 'all') {
         sortedData = sortedData.filter(article => article.tags && article.tags.includes(currentTag));
     }
@@ -102,7 +100,6 @@ function sortByNewest() {
 
 function sortByOldest() {
     let sortedData = [...articlesData].sort((a, b) => new Date(a.created) - new Date(b.created));
-
     if (currentTag !== 'all') {
         sortedData = sortedData.filter(article => article.tags && article.tags.includes(currentTag));
     }
@@ -182,7 +179,6 @@ function scrollRight() {
     });
 }
 
-
 function updateArticleWidth() {
     const articleElement = document.querySelector('.articles-carousel');
     articleWidth = articleElement ? articleElement.offsetWidth : 0;
@@ -214,14 +210,14 @@ function updateHeader() {
 }
 updateHeader();
 
-function logout() {
+function logOut() {
     sessionStorage.removeItem('Session key');
     window.location.href = 'index.html';
 }
 
 const logoutBtn = document.getElementById('loginAnchor');
 if (logoutBtn) {
-    logoutBtn.addEventListener('click', logout);
+    logoutBtn.addEventListener('click', logOut);
 }
 
 const newPostBtn = document.getElementById('newPost');

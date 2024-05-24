@@ -39,6 +39,12 @@ li {
     list-style-type: none;
 }
 
+.login-container {
+    width: 128px;
+    display: flex;
+    justify-content: center;
+}
+
 #loginAnchor {
     text-decoration: none;
     color: white;
