@@ -201,3 +201,14 @@ const logoutBtn = document.getElementById('loginAnchor');
 if (logoutBtn) {
     logoutBtn.addEventListener('click', logout);
 }
+
+const newPostBtn = document.getElementById('newPost');
+if (newPostBtn) {
+    newPostBtn.addEventListener('click', function(event) {
+        if (!loggedIn()) {
+            event.preventDefault();
+            alert('You need to be logged in to create a post. Click OK to go to login page.');
+            window.location.href = 'account/login.html';
+        }
+    });
+}

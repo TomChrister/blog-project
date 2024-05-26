@@ -36,4 +36,3 @@ logInBtn.onclick = function authorize() {
             errorMessage.style.display = 'block';
         });
 }
-

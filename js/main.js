@@ -25,7 +25,7 @@ function carouselDisplay(data) {
     carouselArticleIds = [];
 
     data.slice(0, 3).forEach((post) => {
-        const updatedDate = new Date(post.updated);
+        const updatedDate = new Date(post.created);
         const options = { day: 'numeric', month: 'long', year: 'numeric'};
         const formattedDate = updatedDate.toLocaleDateString('en-GB', options);
         const authorName = post.author.name.replace(/_/g, ' ');
