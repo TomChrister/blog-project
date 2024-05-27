@@ -1,6 +1,6 @@
 # TechPulse - Blog project
 
-Semester project for front end development Q4.
+Semester project for front end development Q4, using HTML, CSS and Javascript.
 
 ### Brief
 
@@ -11,7 +11,6 @@ posts.
 The client requires admin pages to register, login and manage their blog posts.
 During testing, you will use your own account that you create to act as the owner.
 
----
 ## Features
 
 • An interactive banner carousel on the blog feed page, so can you can view a
@@ -50,5 +49,11 @@ post ID on the edit page, so you can easily remove my post if needed.
 • A validated edit form that allows you to update the title, body
 content, or image by sending a POST request to the API for this post ID, ensuring you can
 keep my the posts up to date easily.
----
 
+## Design
+
+https://www.figma.com/design/vj8oYU63iUaic0RgmOKAgz/Blogproject?node-id=26-49&t=QZoO2lq7NdU9K5Zq-1
+
+## Planing board
+
+https://github.com/users/TomChrister/projects/5
