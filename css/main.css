@@ -65,7 +65,6 @@ body {
     color: white;
     font-size: 18px;
     filter: drop-shadow(2px 4px 6px black);
-
 }
 
 @media (max-width: 650px) {

@@ -154,9 +154,6 @@ document.getElementById('searchInput').addEventListener('input', search);
 
 
 // Carousel scrolling functions
-leftBtn.addEventListener("click", scrollLeft);
-rightBtn.addEventListener("click", scrollRight);
-
 function scrollLeft() {
     scrollPosition -= articleWidth;
     if (scrollPosition < 0) {
@@ -178,6 +175,9 @@ function scrollRight() {
         behavior: 'smooth'
     });
 }
+
+leftBtn.addEventListener("click", scrollLeft);
+rightBtn.addEventListener("click", scrollRight);
 
 function updateArticleWidth() {
     const articleElement = document.querySelector('.articles-carousel');
