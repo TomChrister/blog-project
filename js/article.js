@@ -212,3 +212,8 @@ if (newPostBtn) {
         }
     });
 }
+
+window.addEventListener('load', function () {
+    const loadingOverlay = document.getElementById('loading');
+    loadingOverlay.style.display = 'none';
+});
