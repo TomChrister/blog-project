@@ -37,7 +37,7 @@ function displayArticle(article) {
              </div>
         </div>  
         <div class="tags-and-share flex-container">
-            <p>Category • ${article.data.tags}</p> •
+            <p>Category • ${article.data.tags}</p>
         </div>  
         <hr class="hr-line">
         <div class="article-text">${formatArticleBody(article.data.body)}</div>   
@@ -212,3 +212,8 @@ if (newPostBtn) {
         }
     });
 }
+
+window.addEventListener('load', function () {
+    const loadingOverlay = document.getElementById('loading');
+    loadingOverlay.style.display = 'none';
+});
