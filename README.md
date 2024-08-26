@@ -11,8 +11,8 @@ posts.
 The client requires admin pages to register, login and manage their blog posts.
 During testing, you will use your own account that you create to act as the owner.
 
-## Instalation
-techpulse-blogproject.vercel.app
+## Installation
+https://techpulse-blogproject.vercel.app
 
 ## Features
 
