@@ -11,6 +11,9 @@ posts.
 The client requires admin pages to register, login and manage their blog posts.
 During testing, you will use your own account that you create to act as the owner.
 
+## Instalation
+techpulse-blogproject.vercel.app
+
 ## Features
 
 • An interactive banner carousel on the blog feed page, so can you can view a
