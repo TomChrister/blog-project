@@ -2,7 +2,7 @@
 
 A blog website for the latest in technology.
 
-### Project overview 📈
+## Project overview 📈
 
 Brief:
 
