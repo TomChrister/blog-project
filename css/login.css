@@ -104,6 +104,10 @@ h1 {
     font-size: 14px;
 }
 
+.credentials {
+    line-height: 24px;
+}
+
 .logo-form {
     display: none;
 }
