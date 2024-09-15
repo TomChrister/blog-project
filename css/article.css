@@ -12,7 +12,7 @@ body {
 #articleDisplay {
     display: flex;
     flex-direction: column;
-    padding: 16px 16px 84px 16px;
+    padding: 16px 0 84px 0;
 }
 
 #articleDisplay img {
@@ -72,7 +72,7 @@ body {
 .article-text {
     font-size: 18px;
     padding: 34px 20px 0 20px;
-    width: 90%;
+    width: 82%;
     align-self: center;
     line-height: 26px;
     letter-spacing: 1px;
@@ -209,6 +209,20 @@ body {
     font-size: 12px;
     padding: 0 0 18px 0;
     color: red;
+}
+
+@media (max-width: 400px) {
+    .article-text {
+        width: 90%;
+    }
+
+    .flex-container, .content-wrapper h2 {
+        width: 90%;
+    }
+
+    #articleDisplay img {
+        width: 100%;
+    }
 }
 
 @media (max-width: 618px) {
